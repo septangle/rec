@@ -1,0 +1,106 @@
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+html,
+body {
+  margin: 0px;
+  font-family: MicrosoftYaHei, STHeiti;
+  height: 100%;
+}
+* {
+  box-sizing: border-box;
+}
+.App {
+  min-height: 100%;
+}
+.App nav.navbar {
+  z-index: 9;
+  border-radius: 0;
+  background: #fff;
+  border-bottom: 2px solid #d3d3d3;
+  height: 80px;
+  font-size: 14px;
+  color: #333;
+  margin: 0px;
+  padding: 8px 0;
+  line-height: 62px;
+  position: fixed;
+  width: 100%;
+}
+.App nav.navbar .msg {
+  display: inline-block;
+}
+.App nav.navbar .navbar-nav {
+  float: right;
+  display: inline-block;
+}
+.App nav.navbar .nav-item {
+  display: inline-block;
+  padding: 0 37px 0;
+}
+.App nav.navbar .nav-item:hover {
+  color: #000;
+}
+.App nav.navbar .nav-item a {
+  text-decoration: none;
+  color: inherit;
+}
+.App .main {
+  padding-top: 80px;
+  background: #f3f3f3;
+}
+.App .footer {
+  height: 260px;
+  background: #000;
+}
+.App .footer .footer-nav {
+  border-bottom: solid 1px #979797;
+  padding: 60px 0px;
+}
+.App .footer .footer-nav .nav-item {
+  font-size: 20px;
+  color: #fff;
+  letter-spacing: 2px;
+  display: inline-block;
+  padding: 0px 30px;
+}
+.App .footer .footer-nav .nav-item a {
+  text-decoration: none;
+  color: inherit;
+}
+.App .footer .footer-nav .nav-item:first-child {
+  padding-left: 0px;
+}
+.App .footer .meta-desc .meta-desc1 {
+  padding: 20px 0;
+}
+.App .footer .meta-desc span {
+  font-size: 14px;
+  color: #ccc;
+  letter-spacing: 0;
+  padding: 0 50px;
+}
+.App .footer .meta-desc span:first-child {
+  padding-left: 0px;
+}
+.App .footer .meta-desc span+span {
+  border-left: 1px solid #ccc;
+}

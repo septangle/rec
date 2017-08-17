@@ -1,0 +1,26 @@
+.ARSelect {
+  outline: none;
+}
+.ARSelect .dijitPlaceHolder {
+  font-style: none;
+  font-size: 14px;
+}
+.ARSelect .dijitArrowButton {
+  border: none;
+  position: relative;
+  top: -5px;
+}
+.ARSelect .dijitArrowButton .fa {
+  color: #808080;
+}
+.dijitComboBoxMenuPopup .dijitComboBoxMenu {
+  min-width: 200px;
+  border: none;
+  box-shadow: 0px 2px 20px #808080;
+}
+.dijitComboBoxMenuPopup .dijitComboBoxMenu .dijitMenuItem {
+  padding: 10px;
+}
+.dijitComboBoxMenuPopup .dijitComboBoxMenu .dijitMenuItem .dijitMenuItemLabel {
+  padding: 0 5px;
+}

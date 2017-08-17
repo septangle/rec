@@ -1,0 +1,68 @@
+@import "container"
+
+html,body
+  margin 0px;
+  font-family: MicrosoftYaHei,STHeiti;
+  height 100%;
+*
+  box-sizing border-box
+.App
+  min-height 100%;
+  nav.navbar
+    z-index 9
+    border-radius 0
+    background white
+    border-bottom  2px solid lightgray
+    height 80px
+    font-size: 14px;
+    color: #333333;
+    margin 0px
+    padding 8px 0;
+    line-height 62px
+    position fixed
+    width 100%
+    .msg
+      display inline-block
+    .navbar-nav
+      float:right
+      display inline-block
+    .nav-item
+      display inline-block
+      padding 0 37px 0
+      &:hover
+        color: black
+      a
+        text-decoration: none
+        color: inherit
+  .main
+    padding-top 80px;
+    background: #f3f3f3;
+  .footer
+    height 260px
+    background black
+    .footer-nav
+      border-bottom solid 1px #979797;
+      padding 60px 0px;
+      .nav-item
+        font-size: 20px;
+        color: #FFFFFF;
+        letter-spacing: 2px;
+        display:inline-block
+        padding 0px 30px;
+        a
+          text-decoration: none
+          color: inherit
+        &:first-child
+          padding-left: 0px;
+    .meta-desc
+      .meta-desc1
+        padding 20px 0
+      span
+        font-size: 14px;
+        color: #CCCCCC;
+        letter-spacing: 0;
+        padding 0 50px;
+        &:first-child
+          padding-left 0px;
+      span+span
+        border-left 1px solid #CCCCCC

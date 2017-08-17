@@ -1,0 +1,25 @@
+{
+  "name": "angrui",
+  "authors": [
+    "qiuzuhui <qiuzuhui@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "fontawesome#^4.7.0",
+    "dijit": "^1.12.2",
+    "dojox": "^1.12.2",
+    "xstyle": "^0.3.2",
+    "dstore": "^1.1.2"
+  }
+}

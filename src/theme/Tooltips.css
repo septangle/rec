@@ -1,0 +1,85 @@
+.angrui .dijitTooltip {
+  box-sizing: content-box;
+}
+.angrui .dijitTooltipContainer {
+  background-color: #f5f5f5;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 0px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  padding: 9px 14px;
+}
+.angrui .dijitTooltipConnector,
+.angrui .dijitTooltipConnector:after {
+  position: absolute;
+  width: 0;
+  height: 0;
+  display: inline-block;
+  border-color: transparent;
+  border-style: solid;
+}
+.angrui .dijitTooltipConnector:after {
+  content: "";
+  z-index: -1;
+}
+.angrui .dijitTooltipAbove {
+  padding-bottom: 5px;
+}
+.angrui .dijitTooltipAbove .dijitTooltipConnector {
+  bottom: 1px;
+  border-width: 5px 5px 0;
+  border-top-color: #f5f5f5;
+}
+.angrui .dijitTooltipAbove .dijitTooltipConnector:after {
+  border-width: 6px 6px 0;
+  border-top-color: rgba(0,0,0,0.2);
+  left: -6px;
+  bottom: -1px;
+}
+.angrui .dijitTooltipBelow {
+  padding-top: 5px;
+}
+.angrui .dijitTooltipBelow .dijitTooltipConnector {
+  top: 1px;
+  border-width: 0 5px 5px;
+  border-bottom-color: #f5f5f5;
+}
+.angrui .dijitTooltipBelow .dijitTooltipConnector:after {
+  border-width: 0 6px 6px;
+  border-bottom-color: rgba(0,0,0,0.2);
+  left: -6px;
+  top: -1px;
+}
+.angrui .dijitTooltipLeft {
+  padding-right: 5px;
+}
+.angrui .dijitTooltipLeft .dijitTooltipConnector {
+  right: 1px;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #f5f5f5;
+}
+.angrui .dijitTooltipLeft .dijitTooltipConnector:after {
+  border-width: 6px 0 6px 6px;
+  border-left-color: rgba(0,0,0,0.2);
+  bottom: -6px;
+  right: -1px;
+}
+.angrui .dijitTooltipRight {
+  padding-left: 5px;
+}
+.angrui .dijitTooltipRight .dijitTooltipConnector {
+  left: 1px;
+  border-width: 5px 5px 5px 0;
+  border-right-color: #f5f5f5;
+}
+.angrui .dijitTooltipRight .dijitTooltipConnector:after {
+  border-width: 6px 6px 6px 0;
+  border-right-color: rgba(0,0,0,0.2);
+  bottom: -6px;
+  left: -1px;
+}
+.angrui .dijitTooltipABLeft .dijitTooltipConnector {
+  left: 20px;
+}
+.angrui .dijitTooltipABRight .dijitTooltipConnector {
+  right: 20px;
+}
