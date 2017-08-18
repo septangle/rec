@@ -21,7 +21,7 @@ define([
                     throw 'invalid';
                 }
                 return valid && Stores.users.auth({
-                    username:_t.username.value,
+                    tel:_t.username.value,
                     password:_t.password.value
                 })
             }).then(function () {
