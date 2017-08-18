@@ -15,10 +15,11 @@
 <script type="text/javascript">
     require([
         'angrui/App',
-        'angrui/views/RegisterView',
+        'angrui/views/ListView',
         'dojo/domReady!'
-    ], function (App,RegisterView) {
+    ], function (App,ListView) {
          var app = new App({},'app');
+         app.addChild(new ListView());
          app.startup();
     });
 </script>
