@@ -8,10 +8,10 @@ define([
         headers: { 'Content-Type': 'application/json' },
 
         auth:function(user){
-            return request.post("/photo/member/queryPhotoMember.do",{headers:this.headers,data:JSON.stringify(user)})
+            return request.post(dojoConfig.basePath+"/member/login.do",{headers:this.headers,data:JSON.stringify({photoMemberDto:user})})
         },
         register:function(user){
-            return request.post("/photo/member/addPhotoUsers.do",{headers:this.headers,data:JSON.stringify(user)})
+            return request.post(dojoConfig.basePath+"/member/register.do",{headers:this.headers,data:JSON.stringify({photoMemberDto:user})})
         },
     })
 })

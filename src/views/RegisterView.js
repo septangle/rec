@@ -49,7 +49,7 @@ define([
             var values = {};
             values = lang.mixin(values,this.basicInfoForm.getValues());
             values = lang.mixin(values,this.additionalForm.getValues());
-            return values
+            return values;
         },
         login:function () {
             
