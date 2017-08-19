@@ -19,11 +19,14 @@ define([
 ],function (WidgetsInTemplateMixin, BorderContainer, StackContainer, ContentPane, window, Container, domStyle, domGeometry, LayoutWidget, appTemplate, TemplatedMixin, WidgetBase, declare) {
     return declare([LayoutWidget,TemplatedMixin,WidgetsInTemplateMixin],{
         templateString:appTemplate,
-        postCreate:function () {
-          this.inherited(arguments);
-        },
         addView:function (view) {
             this.stackNode.addChild(view);
+        },
+        selectView:function(title){
+            var view = this.stackNode.getChildren().filter(function (view) {
+                return view.title == title
+            })[0];
+            this.stackNode.selectChild(view);
         },
         layout:function(){
             var size = domGeometry.getContentBox(this.domNode);

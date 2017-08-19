@@ -1,4 +1,6 @@
 define([
+    'dijit/layout/_LayoutWidget',
+    'dojo/dom-geometry',
     'dijit/_WidgetBase',
     'dijit/_WidgetsInTemplateMixin',
     'dojo/text!./templates/ListView.html',
@@ -9,11 +11,17 @@ define([
     'xstyle/css!./css/ListView.css',
     "dijit/form/Select",
     'angrui/components/Select',
-    "dijit/form/Form"
-],function (WidgetBase, WidgetsInTemplateMixin, listviewTemplate, TemplatedMixin, declare) {
-    return declare([WidgetBase,TemplatedMixin,WidgetsInTemplateMixin],{
+    "dijit/form/Form",
+    "dijit/layout/BorderContainer",
+    "dijit/layout/ContentPane"
+],function (LayoutWidget, domGeometry, WidgetBase, WidgetsInTemplateMixin, listviewTemplate, TemplatedMixin, declare) {
+    return declare([LayoutWidget,TemplatedMixin,WidgetsInTemplateMixin],{
         templateString:listviewTemplate,
 
+        layout:function(){
+            var size = domGeometry.getContentBox(this.domNode);
+            this.borderContainerNode.resize({w:size.w,h:size.h});
+        }
 
     })
 })

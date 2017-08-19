@@ -3,6 +3,21 @@
   background: #fff;
 }
 .ListView .side-bar {
-  width: 300px;
-  background: #009eff;
+  width: 200px;
+  background: #0a94e8;
+  color: #fff;
+}
+.ListView .side-bar .tab-list .tab {
+  padding: 20px 20px;
+}
+.ListView .side-bar .tab-list .tab .tab-label {
+  padding: 0 10px;
+}
+.ListView .side-bar .tab-list .tab:hover {
+  background: #fff;
+  color: #0a94e8;
+  box-shadow: 0px 2px 15px rgba(0,0,0,0.25);
+}
+.ListView .side-bar .tab-list .tab.selected {
+  border-left: 2px solid #fff;
 }
