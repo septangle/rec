@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>全景平台</title>
+
+    <script src="./dojoConfig.js"></script>
+    <link rel="stylesheet" href="../libs/font-awesome/css/font-awesome.css"/>
+    <script type="text/javascript" src="../libs/dojo/dojo.js"></script>
+    <style>
+        .App .footer{
+            //TODO
+            display: none !important;
+            height: 0 ;
+        }
+    </style>
+</head>
+<body>
+<div id="app"></div>
+<script type="text/javascript">
+    require([
+        'angrui/Store/Stores',
+        'angrui/App',
+        'angrui/views/ListView',
+        'dojo/domReady!'
+    ], function (Stores,App,ListView) {
+        [
+            {thumbnail:"data/images/amoy-by-far-east-hospitality.jpg",title:"",desc:""},
+            {thumbnail:"data/images/amoylobby.jpg",title:"",desc:""},
+            {thumbnail:"data/images/capella-singapore.jpg",title:"",desc:""},
+            {thumbnail:"data/images/cascading-pools-overlooking.jpg",title:"",desc:""},
+            {thumbnail:"data/images/club-room-marina-downtown.jpg",title:"",desc:""},
+            {thumbnail:"data/images/deluxe-double-new.jpg",title:"",desc:""},
+            {thumbnail:"data/images/four-seasons-hotel-singapore.jpg",title:"",desc:""},
+            {thumbnail:"data/images/foyer-by-day.jpg",title:"",desc:""},
+            {thumbnail:"data/images/honeymoon-surprise.jpg",title:"",desc:""},
+            {thumbnail:"data/images/hotel-exterior.jpg",title:"",desc:""},
+            {thumbnail:"data/images/hotel-facade.jpg",title:"",desc:""},
+            {thumbnail:"data/images/hotel-facade-night.jpg",title:"",desc:""},
+            {thumbnail:"data/images/lobby.jpg",title:"",desc:""},
+            {thumbnail:"data/images/lobby-bar.jpg",title:"",desc:""},
+            {thumbnail:"data/images/rediscover-the-iconic.jpg",title:"",desc:""},
+            {thumbnail:"data/images/rooftop-pool.jpg",title:"",desc:""},
+            {thumbnail:"data/images/rooftop-swimming-pool.jpg",title:"",desc:""},
+            {thumbnail:"data/images/rooms-in-the-heritage.jpg",title:"",desc:""},
+            {thumbnail:"data/images/shangri-la-hotel.jpg",title:"",desc:""},
+            {thumbnail:"data/images/suite-upgrade.jpg",title:"",desc:""},
+            {thumbnail:"data/images/the-deluxe-room-with.jpg",title:"",desc:""},
+            {thumbnail:"data/images/the-fullerton-bay-hotel.jpg",title:"",desc:""},
+            {thumbnail:"data/images/the-homely-dining-area.jpg",title:"",desc:""},
+            {thumbnail:"data/images/the-ritz-carlton-millenia.jpg",title:"",desc:""},
+        ].forEach(function (item) {
+            Stores.scans.addSync(item);
+        })
+
+
+         var app = new App({},'app');
+         app.addView(new ListView());
+         app.startup();
+    });
+</script>
+</body>
+</html>

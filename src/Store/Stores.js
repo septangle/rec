@@ -2,9 +2,11 @@ define([
     './data/CityData',
     'dojo/store/Memory',
     'dojo/_base/declare',
-    './'+dojoConfig.storeType+'/UserStore'
+    './'+dojoConfig.storeType+'/UserStore',
+    './'+dojoConfig.storeType+'/ScanStore'
 
-],function (CityData,Memory, declare, UserStore) {
+
+],function (CityData,Memory, declare, UserStore,ScanStore) {
 
     var cityJson = CityData;
 
@@ -38,8 +40,9 @@ define([
                     return { name:item.item_name,id:item.item_code }
                 })
             })
-        }
+        },
 
+        scans : new ScanStore()
 
     }
 })
