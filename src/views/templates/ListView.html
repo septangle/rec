@@ -1,6 +1,6 @@
 <div class="ListView">
     <div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'sidebar', gutters:true" data-dojo-attach-point="borderContainerNode">
-        <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="splitter:true, region:'leading'" class="side-bar" >
+        <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'leading'" class="side-bar" >
             <div class="tab-list">
                 <div class="tab"><span class="tab-icon"><i class="fa fa-user"></i></span><span class="tab-label">全部</span></div>
                 <div class="tab"><span class="tab-icon"><i class="fa fa-user"></i></span><span class="tab-label">未开始处理</span></div>
@@ -8,8 +8,13 @@
                 <div class="tab selected"><span class="tab-icon"><i class="fa fa-user"></i></span><span class="tab-label">处理完成</span></div>
             </div>
         </div>
-        <div data-dojo-type='dijit/layout/_LayoutWidget' data-dojo-mixins='dijit/_Container' data-dojo-props="splitter:true, region:'center'" data-dojo-attach-point="container">
+        <div data-dojo-type='dijit/layout/ContentPane' data-dojo-props="region:'center'" >
+            <div class="titlePane" style=" height: 60px; border:1px solid gainsboro; ">
+                <button class="btn"><i class="fa fa-upload"></i><span class="btn-label">上传</span></button>
+            </div>
+            <div data-dojo-type='dijit/layout/_LayoutWidget' data-dojo-mixins='dijit/_Container'data-dojo-attach-point="container" style="padding-top: 20px;overflow: auto;margin: auto;">
 
+            </div>
         </div>
     </div>
 </div>

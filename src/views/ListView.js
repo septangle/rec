@@ -1,4 +1,5 @@
 define([
+    'dijit/form/Button',
     'dijit/_Container',
     '../Store/Stores',
     '../components/ScanBox',
@@ -18,7 +19,7 @@ define([
     "dijit/form/Form",
     "dijit/layout/BorderContainer",
     "dijit/layout/ContentPane"
-],function (Container, Stores, ScanBox, LayoutContainer, LayoutWidget, domGeometry, WidgetBase, WidgetsInTemplateMixin, listviewTemplate, TemplatedMixin, declare) {
+],function (Button, Container, Stores, ScanBox, LayoutContainer, LayoutWidget, domGeometry, WidgetBase, WidgetsInTemplateMixin, listviewTemplate, TemplatedMixin, declare) {
     return declare([LayoutWidget,TemplatedMixin,WidgetsInTemplateMixin],{
         templateString:listviewTemplate,
 
