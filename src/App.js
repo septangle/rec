@@ -1,4 +1,8 @@
 define([
+    'dijit/_WidgetsInTemplateMixin',
+    'dijit/layout/BorderContainer',
+    'dijit/layout/StackContainer',
+    'dijit/layout/ContentPane',
     'dojo/window',
     'dijit/_Container',
     'dojo/dom-style',
@@ -12,22 +16,18 @@ define([
     'xstyle/css!./css/App.css',
     'xstyle/css!dijit/themes/dijit.css',
     'xstyle/css!./theme/Tooltips.css'
-],function (window, Container, domStyle, domGeometry, LayoutWidget, appTemplate, TemplatedMixin, WidgetBase, declare) {
-    return declare([LayoutWidget,TemplatedMixin,Container],{
+],function (WidgetsInTemplateMixin, BorderContainer, StackContainer, ContentPane, window, Container, domStyle, domGeometry, LayoutWidget, appTemplate, TemplatedMixin, WidgetBase, declare) {
+    return declare([LayoutWidget,TemplatedMixin,WidgetsInTemplateMixin],{
         templateString:appTemplate,
         postCreate:function () {
           this.inherited(arguments);
         },
+        addView:function (view) {
+            this.stackNode.addChild(view);
+        },
         layout:function(){
-            var totalHeight = window.getBox().h;
-            var headerHeight = domGeometry.getMarginBox(this.headerNode).h;
-            var minMainHeight = totalHeight -headerHeight ;
-            domStyle.set(this.mainNode,{
-                minHeight: minMainHeight+'px'
-            });
-            //here we just have one child
-            var singleChild = this.getChildren()[0]
-            singleChild.resize && singleChild.resize({h:minMainHeight});
+            var size = domGeometry.getContentBox(this.domNode);
+            this.borderContainerNode.resize({w:size.w,h:size.h});
         }
     })
 })

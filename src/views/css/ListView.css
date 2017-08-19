@@ -1,0 +1,8 @@
+.ListView {
+  height: 1200px;
+  background: #fff;
+}
+.ListView .side-bar {
+  width: 300px;
+  background: #009eff;
+}

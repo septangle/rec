@@ -26,9 +26,9 @@ define([
         finishStatusPng:  require.toUrl('angrui/css/images/status-finish.png'),
         finishIcon: require.toUrl('angrui/css/images/finished.png'),
         selectPane:function (pane) {
-            this.selected && domClass.remove(this.selected,'selected');
-            this.selected = pane;
-            domClass.add(this.selected,'selected');
+            this._selected && domClass.remove(this._selected,'selected');
+            this._selected = pane;
+            domClass.add(this._selected,'selected');
         },
         saveBasic:function () {
             if(this.basicInfoForm.validate()){
@@ -52,7 +52,8 @@ define([
             return values;
         },
         login:function () {
-            
+            //TODO
+            window.location='./login.html'
         },
         postCreate:function(){
             this.inherited(arguments);

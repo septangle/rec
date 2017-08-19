@@ -19,7 +19,7 @@
         'dojo/domReady!'
     ], function (App,LoginView) {
          var app = new App({},'app');
-         app.addChild(new LoginView());
+         app.addView(new LoginView());
          app.startup();
     });
 </script>
