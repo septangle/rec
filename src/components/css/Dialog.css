@@ -1,0 +1,14 @@
+.Dialog {
+  background: #fff;
+  width: 90% !important;
+  height: 90% !important;
+}
+.Dialog .dijitDialogTitleBar {
+  display: none;
+}
+.Dialog .dijitDialogPaneContent,
+.Dialog iframe {
+  border: none;
+  width: 100% !important;
+  height: 100% !important;
+}
