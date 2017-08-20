@@ -14,8 +14,7 @@ define([
     "dojo/_base/declare",
     'xstyle/css!font-awesome/css/font-awesome.css',
     'xstyle/css!./css/App.css',
-    'xstyle/css!dijit/themes/dijit.css',
-    'xstyle/css!./theme/Tooltips.css'
+    'xstyle/css!./theme/main.css'
 ],function (WidgetsInTemplateMixin, BorderContainer, StackContainer, ContentPane, window, Container, domStyle, domGeometry, LayoutWidget, appTemplate, TemplatedMixin, WidgetBase, declare) {
     return declare([LayoutWidget,TemplatedMixin,WidgetsInTemplateMixin],{
         templateString:appTemplate,
