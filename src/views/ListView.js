@@ -64,14 +64,16 @@ define([
                 scans.forEach(function(scan){
                     _t.container.addChild(new ScanBox({
                         thumbnail:scan.thumbnail,
-                        title:scan.title
+                        title:scan.title,
+                        status:scan.status,
+                        processStatus:scan.processStatus
                     }));
                 })
             });
         },
 
         refresh:function(){//TODO performance
-            this.setStore(this.store || Stores.scans);
+            this.setStore(this.store || Stores.scans.filter({status:'finished'}));
         },
 
 

@@ -1,9 +1,9 @@
 <div class="ScanBox">
-    <img src="${thumbnail}" class="thumbnail" alt="" data-dojo-attach-event="dblclick:preView">
-    <div class="overlay">
+    <img src="${thumbnail}" class="thumbnail" alt="" data-dojo-attach-point="imageNode">
+    <div class="actions-layer">
         <div class="title">${title}</div>
         <div class="actions">
-            <div class="action">
+            <div class="action" data-dojo-attach-point="previewAction">
                 <i class="fa fa-eye" aria-hidden="true" data-dojo-attach-event="click:preView"></i>
             </div>
             <div class="action">
@@ -14,4 +14,5 @@
             </div>
         </div>
     </div>
+    <div class="icon-error" data-dojo-attach-point="errorIcon"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></div>
 </div>
