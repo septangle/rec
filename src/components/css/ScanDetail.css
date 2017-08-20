@@ -1,0 +1,40 @@
+.ScanDetail {
+  padding: 30px;
+}
+.ScanDetail .input-label {
+  display: inline-block;
+  width: 100px;
+  text-align: right;
+  padding: 20px;
+  font-size: 12px;
+  color: #333;
+  letter-spacing: 0;
+}
+.ScanDetail .input-container {
+  height: 40px;
+  width: 240px;
+  border: 1px solid #999;
+  padding: 10px 15px;
+  display: inline-block;
+}
+.ScanDetail .input-container.dijitValidationTextBoxError {
+  border: 1px solid #f00;
+}
+.ScanDetail .input-container .dijitValidationInner {
+  display: none;
+}
+.ScanDetail .input-container input.dijitInputInner {
+  text-align: left;
+  border: none;
+  line-height: 18px;
+  width: 200px;
+  font-size: 16px;
+}
+.ScanDetail .input-container input.dijitInputInner:focus {
+  outline: none;
+}
+.ScanDetail .image-list {
+  min-height: 400px;
+  margin: 30px;
+  border: 1px solid #d3d3d3;
+}

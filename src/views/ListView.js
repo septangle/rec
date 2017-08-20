@@ -1,4 +1,8 @@
 define([
+    'dojo/on',
+    'dojo/_base/lang',
+    '../components/ScanDetail',
+    '../components/Dialog',
     'dijit/form/Button',
     'dijit/_Container',
     '../Store/Stores',
@@ -19,9 +23,11 @@ define([
     "dijit/form/Form",
     "dijit/layout/BorderContainer",
     "dijit/layout/ContentPane"
-],function (Button, Container, Stores, ScanBox, LayoutContainer, LayoutWidget, domGeometry, WidgetBase, WidgetsInTemplateMixin, listviewTemplate, TemplatedMixin, declare) {
+],function (on, lang, ScanDetail, Dialog, Button, Container, Stores, ScanBox, LayoutContainer, LayoutWidget, domGeometry, WidgetBase, WidgetsInTemplateMixin, listviewTemplate, TemplatedMixin, declare) {
     return declare([LayoutWidget,TemplatedMixin,WidgetsInTemplateMixin],{
         templateString:listviewTemplate,
+
+        store:null,
 
         layout:function(){
             var size = domGeometry.getContentBox(this.domNode);
@@ -30,12 +36,50 @@ define([
 
         postCreate:function(){
             this.inherited(arguments);
+        },
+
+        startup:function(){
+            this.inherited(arguments);
+            this.refresh();
             var _t=this;
-            Stores.scans.fetch().then(function (scans) {
+            on(this.prepareTab,'click',function () {
+                _t.setStore(Stores.scans.filter({status:'prepare'}));
+            });
+            on(this.finishedTab,'click',function () {
+                _t.setStore(Stores.scans.filter({status:'finished'}));
+            });
+            on(this.processingTab,'click',function () {
+                _t.setStore(Stores.scans.filter({status:'processing'}));
+            })
+        },
+
+        setStore:function (store) {
+            var _t=this;
+            //listeners
+            this.store = store;
+            _t.container.getChildren().forEach(function(c){
+                _t.container.removeChild(c)
+            });
+            this.store.fetch().then(function (scans) {
                 scans.forEach(function(scan){
-                    _t.container.addChild(new ScanBox(scan));
+                    _t.container.addChild(new ScanBox({
+                        thumbnail:scan.thumbnail,
+                        title:scan.title
+                    }));
                 })
             });
-        }
+        },
+
+        refresh:function(){//TODO performance
+            this.setStore(this.store || Stores.scans);
+        },
+
+
+        newScan:function(){
+            new Dialog({
+                content:new ScanDetail()
+            }).show()
+        },
+
     })
 })
