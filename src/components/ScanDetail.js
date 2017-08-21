@@ -18,7 +18,10 @@ define([
 ],function (FileUploader, Dialog, on, domClass, Memory, StoreContainer, List, Container, Stores, WidgetsInTemplateMixin, scandetailTemplate, TemplatedMixin, WidgetBase, declare) {
 
     var Image= declare([WidgetBase,TemplatedMixin],{
-        templateString:"<div class='photo'><img src='${image}'></div>",
+        templateString:"<div class='photo'><img data-dojo-attach-point='imageNode'></div>",
+        _setImageAttr:function (image) {
+            this.imageNode.src = image || require.toUrl('angrui/css/images/hotel.jpg');
+        }
     })
 
 
@@ -41,7 +44,7 @@ define([
                     store: new Memory({data:scan.photos}), // a dstore collection
                     renderItem: function (item) {
                         return new Image({
-                            image:item.image || require.toUrl('angrui/css/images/hotel.jpg'),
+                            image:item.image,
                             name:item.name
                         });
                     }
@@ -86,7 +89,13 @@ define([
             dialog.show();
         },
         startProcess:function(){
-            Stores.scans.startProcess();
+            var _t=this;
+            Stores.scans.startProcess(this.scanId).then(function () {
+                _t.finished();
+            });
+        },
+        finished:function () {
+
         }
 
     })

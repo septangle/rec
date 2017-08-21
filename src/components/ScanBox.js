@@ -29,6 +29,10 @@ define([
             }).show()
         },
 
+        _setThumbnailAttr:function (thumbnail) {
+            this.imageNode.src = thumbnail || require.toUrl('angrui/css/images/hotel.jpg');
+        },
+
         edit:function () {
             var size = window.getBox();
             new Dialog({

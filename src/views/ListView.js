@@ -54,6 +54,9 @@ define([
             on(this.processingTab,'click',function () {
                 _t.setStore(Stores.scans.filter({status:'processing'}));
             })
+            Stores.scans.on('update,delete,add',function () {
+                _t.refresh();
+            })
         },
 
         setStore:function (store) {
@@ -88,16 +91,21 @@ define([
                     createScan:function(){
                         return Stores.scans.add({
                             title:this.scanTitle.get('value'),
-                            photos:[]
+                            photos:[],
+                            status:'prepare'
                         }).then(function (scan) {
                             dialog.hide()
                             var size = window.getBox();
-                            new Dialog({
+                            var dialog2 = new Dialog({
                                 content:new ScanDetail({
                                     scanId:scan.id,
                                     style:"width:"+size.w*0.8+"px;",
+                                    finished:function(){
+                                        dialog2.hide();
+                                    }
                                 }),
-                            }).show()
+                            });
+                            dialog2.show()
                         })
                     }
                 })
