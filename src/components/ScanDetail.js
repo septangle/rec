@@ -18,7 +18,7 @@ define([
 ],function (FileUploader, Dialog, on, domClass, Memory, StoreContainer, List, Container, Stores, WidgetsInTemplateMixin, scandetailTemplate, TemplatedMixin, WidgetBase, declare) {
 
     var Image= declare([WidgetBase,TemplatedMixin],{
-        templateString:"<div class='photo'><img src='${image}'></div>"
+        templateString:"<div class='photo'><img src='${image}'></div>",
     })
 
 
@@ -33,24 +33,28 @@ define([
 
         },
         startup:function(){
-            this.inherited(arguments)
-            this.refresh();
+            this.inherited(arguments);
+            var _t=this;
+            Stores.scans.get(this.scanId).then(function (scan) {
+                _t.imgList = new StoreContainer({
+                    insertChildIndex:-1,
+                    store: new Memory({data:scan.photos}), // a dstore collection
+                    renderItem: function (item) {
+                        return new Image({
+                            image:item.image || require.toUrl('angrui/css/images/hotel.jpg'),
+                            name:item.name
+                        });
+                    }
+                },_t.imgList);
+                _t.scanTitle.set('value',scan.title);
+                _t.imgList.startup();
+            });
         },
         refresh:function () {
             var _t=this;
-            if(this.scanId){
-                Stores.scans.get(this.scanId).then(function (scan) {
-                    var list = new StoreContainer({
-                        insertChildIndex:-1,
-                        store: new Memory({data:scan.photos}), // a dstore collection
-                        renderItem: function (item) {
-                            return new Image(item);
-                        }
-                    },_t.imgList);
-                    _t.scanTitle.set('value',scan.title);
-                    list.startup();
-                });
-            }
+            Stores.scans.get(this.scanId).then(function (scan) {
+                _t.imgList.setStore(new Memory({data:scan.photos}))
+            })
         },
         upload:function(){
 

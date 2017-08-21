@@ -5,6 +5,12 @@ define([
 ],function (Deferred, declare, Memory) {
     return declare([Memory],{
         addImage:function(scanId,formData){
+            var fileName = formData.get('file').name;
+
+            var scan = this.getSync(scanId);
+            scan.photos.push({
+                name:fileName
+            });
             var dfd  = new Deferred();
             var _t=this;
             var i=0;

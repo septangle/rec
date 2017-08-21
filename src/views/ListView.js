@@ -1,9 +1,10 @@
 define([
+    '../components/ScanDetail',
     'dojo/window',
     'dojo/dom-style',
     'dojo/on',
     'dojo/_base/lang',
-    '../components/ScanDetail',
+    '../components/ScanCreation',
     '../components/Dialog',
     'dijit/form/Button',
     'dijit/_Container',
@@ -25,7 +26,7 @@ define([
     "dijit/form/Form",
     "dijit/layout/BorderContainer",
     "dijit/layout/ContentPane"
-],function (window, domStyle, on, lang, ScanDetail, Dialog, Button, Container, Stores, ScanBox, LayoutContainer, LayoutWidget, domGeometry, WidgetBase, WidgetsInTemplateMixin, listviewTemplate, TemplatedMixin, declare) {
+],function (ScanDetail,window, domStyle, on, lang, ScanCreation, Dialog, Button, Container, Stores, ScanBox, LayoutContainer, LayoutWidget, domGeometry, WidgetBase, WidgetsInTemplateMixin, listviewTemplate, TemplatedMixin, declare) {
     return declare([LayoutWidget,TemplatedMixin,WidgetsInTemplateMixin],{
         templateString:listviewTemplate,
 
@@ -81,8 +82,27 @@ define([
 
 
         newScan:function(){
-
-
+            var size = window.getBox();
+            var dialog = new Dialog({
+                content:new ScanCreation({
+                    createScan:function(){
+                        return Stores.scans.add({
+                            title:this.scanTitle.get('value'),
+                            photos:[]
+                        }).then(function (scan) {
+                            dialog.hide()
+                            var size = window.getBox();
+                            new Dialog({
+                                content:new ScanDetail({
+                                    scanId:scan.id,
+                                    style:"width:"+size.w*0.8+"px;",
+                                }),
+                            }).show()
+                        })
+                    }
+                })
+            });
+            dialog.show()
         },
 
     })

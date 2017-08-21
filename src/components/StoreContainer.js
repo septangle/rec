@@ -42,6 +42,10 @@ define([
             }));
         },
 
+        setStore:function(store){
+            this.store = store;
+            this.refresh();
+        },
 
         startup:function(){
             this.inherited(arguments);
