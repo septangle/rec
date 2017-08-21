@@ -7,19 +7,19 @@
     <title>全景平台</title>
 
     <script src="./dojoConfig.js"></script>
-    <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.css"/>
-    <script type="text/javascript" src="libs/dojo/dojo.js"></script>
+    <link rel="stylesheet" href="../libs/font-awesome/css/font-awesome.css"/>
+    <script type="text/javascript" src="../libs/dojo/dojo.js"></script>
 </head>
-<body>
+<body class="angrui">
 <div id="app"></div>
 <script type="text/javascript">
     require([
         'angrui/App',
-        'angrui/views/ListView',
+        'angrui/views/RegisterView',
         'dojo/domReady!'
-    ], function (App,ListView) {
+    ], function (App,RegisterView) {
          var app = new App({},'app');
-         app.addView(new ListView());
+         app.addView(new RegisterView());
          app.startup();
     });
 </script>

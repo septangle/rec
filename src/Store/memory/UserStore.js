@@ -5,13 +5,13 @@ define([
     return declare([Memory],{
         data:[
             {
-                username :'demo',
+                tel :'demo',
                 password: '123',
             }
         ],
         auth:function(args){
             return this.filter({
-                username :args.username,
+                tel :args.tel,
                 password: args.password,
             }).fetch().then(function (users) {
                 if(users.length){

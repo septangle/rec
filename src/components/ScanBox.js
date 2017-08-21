@@ -35,16 +35,24 @@ define([
 
         edit:function () {
             var size = window.getBox();
-            new Dialog({
+            var dialog = new Dialog({
                 content:new ScanDetail({
                     scanId:this.scanId,
                     style:"width:"+size.w*0.8+"px;",
+                    finished:function(){
+                        dialog.hide();
+                    }
                 }),
-            }).show()
+            });
+            dialog.show()
         },
 
         remove:function(){
-            Stores.scans.remove(this.id);
+            Stores.scans.remove(this.scanId);
+        },
+        
+        paint:function () {
+            
         },
 
         startup:function(){
@@ -56,9 +64,18 @@ define([
                     display:'block'
                 })
             }
-            this.preViewAble || domStyle.set(_t.previewAction,{
-                display:'none'
-            });
+            if(this.preViewAble ){ //TODO use css
+                domStyle.set(_t.editAction,{
+                    display:'none'
+                });
+            }else{
+                domStyle.set(_t.paintAction,{
+                    display:'none'
+                });
+                domStyle.set(_t.previewAction,{
+                    display:'none'
+                });
+            }
             on(_t.imageNode,'dblclick',function(){
                 if(_t.preViewAble) {
                     _t.preView();

@@ -8,6 +8,7 @@ define([
             var fileName = formData.get('file').name;
 
             var scan = this.getSync(scanId);
+            scan.photos = scan.photos || [];
             scan.photos.push({
                 name:fileName
             });
