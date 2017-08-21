@@ -1,0 +1,63 @@
+.FileUploader
+  .uploadNode
+    padding 15px;
+    box-sizing border-box;
+    .placeHolder
+      height 200px;
+      border: 1px dashed #a9a9a9;
+      position: relative;
+      text-align: center;
+      color: #cbcbcb;
+      font-size: 2em;
+      .placeHolderText
+        position: relative;
+        top: 40%;
+  .action-btns
+    text-align center;
+    padding 10px;
+  .hide
+    display: none;
+  .dragOver
+    .placeHolder
+      border: 1px dashed #00f435;
+      color: #cbcbcb;
+  .dijitButton
+    position relative;
+    height 40px;
+    min-width 100px;
+    background: #009EFF;
+    border none
+    font-size: 16px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    line-height: 16px;
+    outline none !important
+    &:focus
+      outline:none
+    &:hover
+      box-shadow : 0px 2px 15px rgba(0, 0, 0, 0.25);
+    .dijitButtonNode
+      border none
+      line-height 40px;
+      padding 0 10px
+    .dijitButtonContents
+      outline none !important
+  .uploadItem
+    padding 5px 0
+    .filename
+      padding 5px 0
+      color #585858
+    .closeIcon
+      color: gray
+      &:hover
+        color: red
+  .dijitProgressBar
+    border: 1px solid #dedada;
+    color white
+    .dijitProgressBarFull
+      height 20px;
+      .dijitProgressBarTile
+        background: #009EFF;
+    .dijitProgressBarLabel
+      line-height 20px;
+

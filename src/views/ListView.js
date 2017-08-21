@@ -63,6 +63,7 @@ define([
             this.store.fetch().then(function (scans) {
                 scans.forEach(function(scan){
                     _t.container.addChild(new ScanBox({
+                        scanId:scan.id,
                         thumbnail:scan.thumbnail,
                         title:scan.title,
                         status:scan.status,

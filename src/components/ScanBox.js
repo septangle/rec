@@ -31,7 +31,9 @@ define([
 
         edit:function () {
             new Dialog({
-                content:new ScanDetail(),
+                content:new ScanDetail({
+                    scanId:this.scanId
+                }),
             }).show()
         },
 

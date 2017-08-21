@@ -1,0 +1,13 @@
+<div class="FileUploader">
+    <div>
+        <div data-dojo-attach-point="uploadNode,containerNode" class="uploadNode">
+            <div class="placeHolder" data-dojo-attach-point="placeHolderNode" ><div class="placeHolderText">拖拽文件到此区域</div></div>
+        </div>
+    </div>
+    <div class="action-btns">
+        <input type="file" style="display: none;" data-dojo-attach-point="uploadFile" />
+        <button class="primary" data-dojo-type="dijit/form/Button" data-dojo-attach-point="uploadButton">选择文件</button>
+        <button class="primary" data-dojo-type="dijit/form/Button" data-dojo-attach-event="click:_upload">上传</button>
+        <button data-dojo-type="dijit/form/Button" data-dojo-attach-event="click:_cancel">取消</button>
+    </div>
+</div>

@@ -1,11 +1,12 @@
 define([
+    'dojo/keys',
     'dojo/dom-class',
     'dojo/on',
     'dijit/DialogUnderlay',
     'dijit/Dialog',
     'dojo/_base/declare',
     'xstyle/css!./css/Dialog.css'
-],function (domClass, on, DialogUnderlay, Dialog, declare) {
+],function (keys, domClass, on, DialogUnderlay, Dialog, declare) {
     return declare([Dialog], {
         closeOnBlur:true,
         closeByEsc:true,
@@ -18,7 +19,12 @@ define([
             var _t =this;
             this.inherited(arguments)
             _t.closeOnBlur && _t.own(
-                on( DialogUnderlay._singleton.domNode, 'click', _t.hide.bind(_t) )
+                on( DialogUnderlay._singleton.domNode, 'click', function(){
+                    //TODO
+                    if(Dialog._DialogLevelManager.isTop(_t)){
+                        _t.hide()
+                    }
+                })
             );
             _t.closeByEsc && _t.own(
                 on(document.body, 'keydown', function(evt){

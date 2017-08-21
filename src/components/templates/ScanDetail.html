@@ -1,9 +1,15 @@
 <div class="ScanDetail">
     <div class="input-group">
         <div class="input-label" >场景名称</div>
-        <div class="input-container"  data-dojo-type="dijit/form/ValidationTextBox"></div>
+        <div class="input-container"  data-dojo-type="dijit/form/ValidationTextBox" data-dojo-attach-point="scanTitle"></div>
     </div>
-    <div class="image-list">
-
+    <div class="image-list" data-dojo-attach-point="imgList">
+        <div  class='photo upload-btn' data-dojo-attach-event="click:openDialog">
+            <img  src="${plusIcon}" alt="" >
+        </div>
+    </div>
+    <div class="button-bar">
+        <button class="btn">创建</button>
+        <button class="btn">开始处理</button>
     </div>
 </div>
