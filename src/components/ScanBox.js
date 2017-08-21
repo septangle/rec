@@ -25,14 +25,16 @@ define([
         preView:function() {
             var size = window.getBox();
             new Dialog({
-                content:string.substitute("<iframe src='http://www.163.com' ></iframe>",{w:size.w*0.9,h:size.h*0.9}),
+                content:string.substitute("<iframe src='http://www.163.com' width='${w}px' height='${h}px' ></iframe>",{w:size.w*0.9,h:size.h*0.9}),
             }).show()
         },
 
         edit:function () {
+            var size = window.getBox();
             new Dialog({
                 content:new ScanDetail({
-                    scanId:this.scanId
+                    scanId:this.scanId,
+                    style:"width:"+size.w*0.8+"px;",
                 }),
             }).show()
         },

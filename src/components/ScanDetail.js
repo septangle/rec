@@ -1,6 +1,6 @@
 define([
     '../components/FileUploader',
-    'dijit/Dialog',
+    '../components/Dialog',
     'dojo/on',
     'dojo/dom-class',
     'dstore/Memory',
@@ -80,6 +80,9 @@ define([
                 })
             });
             dialog.show();
+        },
+        startProcess:function(){
+
         }
 
     })

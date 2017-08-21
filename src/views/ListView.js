@@ -1,4 +1,6 @@
 define([
+    'dojo/window',
+    'dojo/dom-style',
     'dojo/on',
     'dojo/_base/lang',
     '../components/ScanDetail',
@@ -23,7 +25,7 @@ define([
     "dijit/form/Form",
     "dijit/layout/BorderContainer",
     "dijit/layout/ContentPane"
-],function (on, lang, ScanDetail, Dialog, Button, Container, Stores, ScanBox, LayoutContainer, LayoutWidget, domGeometry, WidgetBase, WidgetsInTemplateMixin, listviewTemplate, TemplatedMixin, declare) {
+],function (window, domStyle, on, lang, ScanDetail, Dialog, Button, Container, Stores, ScanBox, LayoutContainer, LayoutWidget, domGeometry, WidgetBase, WidgetsInTemplateMixin, listviewTemplate, TemplatedMixin, declare) {
     return declare([LayoutWidget,TemplatedMixin,WidgetsInTemplateMixin],{
         templateString:listviewTemplate,
 
@@ -79,9 +81,8 @@ define([
 
 
         newScan:function(){
-            new Dialog({
-                content:new ScanDetail()
-            }).show()
+
+
         },
 
     })
