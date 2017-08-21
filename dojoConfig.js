@@ -10,6 +10,5 @@ var dojoConfig={
             name:'angrui',
             location:'../../src'
         }
-
     ]
 };

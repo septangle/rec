@@ -23,5 +23,13 @@ define([
                 return data.photoMemberDto;
             })
         },
+        current:function(){
+            return request.get(dojoConfig.basePath+"/member/current",{headers:this.headers}).then(function (data) {
+                if(data.error){
+                    throw data.error
+                }
+                return data.photoMemberDto;
+            })
+        }
     })
 })
