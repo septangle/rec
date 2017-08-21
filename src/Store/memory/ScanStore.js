@@ -26,5 +26,10 @@ define([
             },10);
             return dfd.promise;
         },
+        startProcess:function(scanId){
+            var scan = this.getSync(scanId);
+            scan.status= "processing";
+            return this.put(scan);
+        },
     })
 })

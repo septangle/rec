@@ -33,7 +33,7 @@ define([
         refresh:function () {
             var _t=this;
             _t.getChildren().forEach(function(c){
-                _t.container.removeChild(c)
+                _t.removeChild(c)
             });
             return when(this.store && this.store.fetch().then(function (items) {
                 items.forEach(function (item) {

@@ -86,7 +86,7 @@ define([
             dialog.show();
         },
         startProcess:function(){
-
+            Stores.scans.startProcess();
         }
 
     })
