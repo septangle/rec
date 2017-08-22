@@ -50,7 +50,7 @@ define([
                 _t.setStore(Stores.scans.filter({status:'uploadingPhotos'}));
             });
             on(this.finishedTab,'click',function () {
-                _t.setStore(Stores.scans.filter({status:'finished'}));
+                _t.setStore(Stores.scans.filter({status:'completed'}));
             });
             on(this.processingTab,'click',function () {
                 _t.setStore(Stores.scans.filter({status:'processing,failed'}));
@@ -82,7 +82,7 @@ define([
         },
 
         refresh:function(){//TODO performance
-            this.setStore(this.store || Stores.scans.filter({status:'finished'}));
+            this.setStore(this.store || Stores.scans.filter({status:'completed'}));
         },
 
 

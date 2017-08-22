@@ -25,7 +25,7 @@ define([
         preView:function() {
             var size = window.getBox();
             new Dialog({
-                content:string.substitute("<iframe src='http://www.163.com' width='${w}px' height='${h}px' ></iframe>",{w:size.w*0.9,h:size.h*0.9}),
+                content:string.substitute("<iframe src='https://beta.benaco.com/view/${scanId}' width='${w}px' height='${h}px' ></iframe>",{w:size.w*0.9,h:size.h*0.9,scanId:this.scanId}),
             }).show()
         },
 
@@ -58,7 +58,7 @@ define([
         startup:function(){
             this.inherited(arguments);
             var _t=this;
-            this.preViewAble = _t.status.status === 'finished';
+            this.preViewAble = _t.status.status === 'completed';
             if(_t.status.status === 'failed'){
                 domStyle.set(this.errorIcon,{
                     display:'block'
