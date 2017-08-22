@@ -102,9 +102,16 @@ function databaseInitialize() {
                 console.log(status);
                 scan.status = status;
                 return scan;
+            },function(err){
+                console.log(err);
+                scans.remove({id:scan.id});
+                return null
             })
         })).then(function (list) {
-            var status = req.query.status
+            var status = req.query.status;
+            list = list.filter(function(scan){
+                return scan;
+            });
             if(status){
                 status = status.split(',')
                 list = list.filter(function(scan){
