@@ -30,10 +30,10 @@ fsExtra.ensureDirSync(uploadFolder);
 
 var Storage = multer.diskStorage({
     destination: function(req, file, callback) {
-        callback(null, uploadFolder);
+        fsExtra.ensureDirSync(path.resolve(uploadFolder,req.params.id));
+        callback(null, path.resolve(uploadFolder,req.params.id));
     },
     filename: function(req, file, callback) {
-        fsExtra.ensureDirSync(path.resolve(uploadFolder,req.params.id));
         callback(null,file.originalname);
     }
 });
@@ -146,6 +146,10 @@ function databaseInitialize() {
         }
     });
 
+    app.get('/photo-web/scan/:id', function (req, res) {
+        scans.remove({id:req.params.id});
+        res.sendStatus(200);
+    });
 
     app.post('/photo-web/scan/:id/images', upload, function (req, res) {
         var files = req.files;
