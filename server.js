@@ -98,13 +98,21 @@ function databaseInitialize() {
         var user = req.session.user;
         var list = scans.find({userId:user.id});
         Q.all(list.map(function (scan) {
+            if(scan.status && scan.status.status == "completed" ){//no need fetch anymore
+                return scan
+            }
             return api.scanStatus(scan.id).then(function (status) {
                 console.log(status);
                 scan.status = status;
+                if(status.status == "completed"){
+                    scans.update(scan);
+                }
                 return scan;
             },function(err){
                 console.log(err);
-                scans.remove({id:scan.id});
+                if(err.statusCode == 404){
+                    scans.remove(scan);
+                }
                 return null
             })
         })).then(function (list) {
@@ -145,8 +153,15 @@ function databaseInitialize() {
         var user = req.session.user;
         var scan = scans.find({id:req.params.id})[0];
         if(scan){
+            if(scan.status && scan.status.status == "completed" ){//no need fetch anymore
+                res.json(scan);
+                res.end();
+            }
             api.scanStatus(scan.id).then(function (status) {
                 scan.status = status;
+                if(status.status == "completed"){
+                    scans.update(scan);
+                }
                 return scan;
             }).then(function (scan) {
                 res.json(scan);
@@ -157,8 +172,8 @@ function databaseInitialize() {
         }
     });
 
-    app.get('/photo-web/scan/:id', function (req, res) {
-        scans.remove({id:req.params.id});
+    app.delete('/photo-web/scan/:id', function (req, res) {
+        scans.findAndRemove({id:req.params.id});
         res.sendStatus(200);
     });
 
