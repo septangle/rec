@@ -25,7 +25,7 @@ module.exports= {
             }
         )
     },
-    addPics:function(pics){
+    addPics:function(scanId,pics){
         console.log('adding pics',pics);
 
         var formData = {
@@ -39,7 +39,7 @@ module.exports= {
         return rq(
             {
                 method: 'POST',
-                uri:baseUrl+'/scans/id/'+args.scanId+'/add-photos',
+                uri:baseUrl+'/scans/id/'+scanId+'/add-photos',
                 form: formData
             }
         )

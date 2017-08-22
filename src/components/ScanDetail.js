@@ -1,4 +1,5 @@
 define([
+    '../components/LoaderMixin',
     '../components/FileUploader',
     '../components/Dialog',
     'dojo/on',
@@ -15,7 +16,7 @@ define([
     "dojo/_base/declare",
     'dijit/form/ValidationTextBox',
     'xstyle/css!./css/ScanDetail.css'
-],function (FileUploader, Dialog, on, domClass, Memory, StoreContainer, List, Container, Stores, WidgetsInTemplateMixin, scandetailTemplate, TemplatedMixin, WidgetBase, declare) {
+],function (LoaderMixin,FileUploader, Dialog, on, domClass, Memory, StoreContainer, List, Container, Stores, WidgetsInTemplateMixin, scandetailTemplate, TemplatedMixin, WidgetBase, declare) {
 
     var Image= declare([WidgetBase,TemplatedMixin],{
         templateString:"<div class='photo'><img data-dojo-attach-point='imageNode'></div>",
@@ -25,7 +26,7 @@ define([
     })
 
 
-    return declare([WidgetBase,TemplatedMixin,WidgetsInTemplateMixin],{
+    return declare([WidgetBase,TemplatedMixin,WidgetsInTemplateMixin,LoaderMixin],{
         templateString:scandetailTemplate,
         plusIcon:require.toUrl('angrui/css/images/plus.png'),
         _setMultiAttr: function(val) {
@@ -38,7 +39,7 @@ define([
         startup:function(){
             this.inherited(arguments);
             var _t=this;
-            Stores.scans.get(this.scanId).then(function (scan) {
+            var p = Stores.scans.get(this.scanId).then(function (scan) {
                 _t.imgList = new StoreContainer({
                     insertChildIndex:-1,
                     store: new Memory({data:scan.photos}), // a dstore collection
@@ -52,12 +53,16 @@ define([
                 _t.scanTitle.set('value',scan.title);
                 _t.imgList.startup();
             });
+            this._requestLoader(p)
+
         },
         refresh:function () {
             var _t=this;
-            Stores.scans.get(this.scanId).then(function (scan) {
+            var p = Stores.scans.get(this.scanId).then(function (scan) {
                 _t.imgList.setStore(new Memory({data:scan.photos}))
             })
+            this._requestLoader(p)
+
         },
         upload:function(){
 
@@ -90,9 +95,10 @@ define([
         },
         startProcess:function(){
             var _t=this;
-            Stores.scans.startProcess(this.scanId).then(function () {
+            var p = Stores.scans.startProcess(this.scanId).then(function () {
                 _t.finished();
             });
+            this._requestLoader(p)
         },
         finished:function () {
 

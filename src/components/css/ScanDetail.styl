@@ -1,5 +1,10 @@
 .ScanDetail
   padding 30px
+  .loader-node
+    display:none
+    color: white
+    &.show
+      display: inline-block
   .input-label
     display: inline-block;
     width: 100px;
@@ -34,7 +39,9 @@
       display inline-block
       margin 5px;
       img
+      img
         height: 200px;
+        width: 200px
       &.add-btn
         cursor pointer
     .upload-btn

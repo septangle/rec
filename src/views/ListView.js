@@ -1,4 +1,5 @@
 define([
+    '../components/LoaderMixin',
     '../components/ScanDetail',
     'dojo/window',
     'dojo/dom-style',
@@ -26,8 +27,8 @@ define([
     "dijit/form/Form",
     "dijit/layout/BorderContainer",
     "dijit/layout/ContentPane"
-],function (ScanDetail,window, domStyle, on, lang, ScanCreation, Dialog, Button, Container, Stores, ScanBox, LayoutContainer, LayoutWidget, domGeometry, WidgetBase, WidgetsInTemplateMixin, listviewTemplate, TemplatedMixin, declare) {
-    return declare([LayoutWidget,TemplatedMixin,WidgetsInTemplateMixin],{
+],function (LoaderMixin,ScanDetail,window, domStyle, on, lang, ScanCreation, Dialog, Button, Container, Stores, ScanBox, LayoutContainer, LayoutWidget, domGeometry, WidgetBase, WidgetsInTemplateMixin, listviewTemplate, TemplatedMixin, declare) {
+    return declare([LayoutWidget,TemplatedMixin,WidgetsInTemplateMixin,LoaderMixin],{
         templateString:listviewTemplate,
 
         store:null,
@@ -46,13 +47,13 @@ define([
             this.refresh();
             var _t=this;
             on(this.prepareTab,'click',function () {
-                _t.setStore(Stores.scans.filter({status:'prepare'}));
+                _t.setStore(Stores.scans.filter({status:'uploadingPhotos'}));
             });
             on(this.finishedTab,'click',function () {
                 _t.setStore(Stores.scans.filter({status:'finished'}));
             });
             on(this.processingTab,'click',function () {
-                _t.setStore(Stores.scans.filter({status:'processing'}));
+                _t.setStore(Stores.scans.filter({status:'processing,failed'}));
             })
             Stores.scans.on('update,delete,add',function () {
                 _t.refresh();
@@ -66,7 +67,7 @@ define([
             _t.container.getChildren().forEach(function(c){
                 _t.container.removeChild(c)
             });
-            this.store.fetch().then(function (scans) {
+            var p = this.store.fetch().then(function (scans) {
                 scans.forEach(function(scan){
                     _t.container.addChild(new ScanBox({
                         scanId:scan.id,
@@ -77,6 +78,7 @@ define([
                     }));
                 })
             });
+            this._requestLoader(p)
         },
 
         refresh:function(){//TODO performance
@@ -89,10 +91,10 @@ define([
             var dialog = new Dialog({
                 content:new ScanCreation({
                     createScan:function(){
-                        return Stores.scans.add({
+                        var p = Stores.scans.add({
                             title:this.scanTitle.get('value'),
                             photos:[],
-                            status:'prepare'
+                            status:'uploadingPhotos'
                         }).then(function (scan) {
                             dialog.hide()
                             var size = window.getBox();
@@ -107,6 +109,8 @@ define([
                             });
                             dialog2.show()
                         })
+                        this._requestLoader(p)
+                        return p;
                     }
                 })
             });

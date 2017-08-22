@@ -1,6 +1,13 @@
 .ScanDetail {
   padding: 30px;
 }
+.ScanDetail .loader-node {
+  display: none;
+  color: #fff;
+}
+.ScanDetail .loader-node.show {
+  display: inline-block;
+}
 .ScanDetail .input-label {
   display: inline-block;
   width: 100px;
@@ -44,6 +51,7 @@
 }
 .ScanDetail .image-list .photo img {
   height: 200px;
+  width: 200px;
 }
 .ScanDetail .image-list .photo.add-btn {
   cursor: pointer;
