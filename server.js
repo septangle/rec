@@ -197,7 +197,6 @@ function databaseInitialize() {
 
 
     app.post('/photo-web/scan/:id/startProcess', function (req, res) {
-        req.params.id
         var user = req.session.user;
         var scan = scans.find({id:req.params.id})[0];
         var files = scan.photos.map(function(p){
