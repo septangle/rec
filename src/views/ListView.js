@@ -1,4 +1,5 @@
 define([
+    'dojo/dom-class',
     '../components/LoaderMixin',
     '../components/ScanDetail',
     'dojo/window',
@@ -27,7 +28,7 @@ define([
     "dijit/form/Form",
     "dijit/layout/BorderContainer",
     "dijit/layout/ContentPane"
-],function (LoaderMixin,ScanDetail,window, domStyle, on, lang, ScanCreation, Dialog, Button, Container, Stores, ScanBox, LayoutContainer, LayoutWidget, domGeometry, WidgetBase, WidgetsInTemplateMixin, listviewTemplate, TemplatedMixin, declare) {
+],function (domClass, LoaderMixin, ScanDetail, window, domStyle, on, lang, ScanCreation, Dialog, Button, Container, Stores, ScanBox, LayoutContainer, LayoutWidget, domGeometry, WidgetBase, WidgetsInTemplateMixin, listviewTemplate, TemplatedMixin, declare) {
     return declare([LayoutWidget,TemplatedMixin,WidgetsInTemplateMixin,LoaderMixin],{
         templateString:listviewTemplate,
 
@@ -47,12 +48,21 @@ define([
             this.refresh();
             var _t=this;
             on(this.prepareTab,'click',function () {
+                domClass.toggle(_t.prepareTab,'selected',true);
+                domClass.toggle(_t.finishedTab,'selected',false);
+                domClass.toggle(_t.processingTab,'selected',false); //TODO
                 _t.setStore(Stores.scans.filter({status:'uploadingPhotos'}));
             });
             on(this.finishedTab,'click',function () {
+                domClass.toggle(_t.prepareTab,'selected',false);
+                domClass.toggle(_t.finishedTab,'selected',true);
+                domClass.toggle(_t.processingTab,'selected',false); //TODO
                 _t.setStore(Stores.scans.filter({status:'completed'}));
             });
             on(this.processingTab,'click',function () {
+                domClass.toggle(_t.prepareTab,'selected',false);
+                domClass.toggle(_t.finishedTab,'selected',false);
+                domClass.toggle(_t.processingTab,'selected',true); //TODO
                 _t.setStore(Stores.scans.filter({status:'processing,failed'}));
             })
             Stores.scans.on('update,delete,add',function () {

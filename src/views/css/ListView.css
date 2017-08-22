@@ -1,7 +1,6 @@
 .ListView {
   height: 1200px;
   background: #fff;
-  cursor: pointer;
 }
 .ListView .side-bar {
   width: 200px;
@@ -9,6 +8,7 @@
   color: #fff;
 }
 .ListView .side-bar .tab-list .tab {
+  cursor: pointer;
   padding: 20px 20px;
 }
 .ListView .side-bar .tab-list .tab .tab-icon {
