@@ -58,8 +58,8 @@ define([
         startup:function(){
             this.inherited(arguments);
             var _t=this;
-            this.preViewAble = _t.status === 'finished';
-            if(_t.processStatus === 'failed'){
+            this.preViewAble = _t.status.status === 'finished';
+            if(_t.status.status === 'failed'){
                 domStyle.set(this.errorIcon,{
                     display:'block'
                 })
