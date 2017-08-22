@@ -1,4 +1,5 @@
 define([
+    './Store/Stores',
     'dijit/_WidgetsInTemplateMixin',
     'dijit/layout/BorderContainer',
     'dijit/layout/StackContainer',
@@ -15,7 +16,7 @@ define([
     'xstyle/css!font-awesome/css/font-awesome.css',
     'xstyle/css!./css/App.css',
     'xstyle/css!./theme/main.css'
-],function (WidgetsInTemplateMixin, BorderContainer, StackContainer, ContentPane, window, Container, domStyle, domGeometry, LayoutWidget, appTemplate, TemplatedMixin, WidgetBase, declare) {
+],function (Stores,WidgetsInTemplateMixin, BorderContainer, StackContainer, ContentPane, window, Container, domStyle, domGeometry, LayoutWidget, appTemplate, TemplatedMixin, WidgetBase, declare) {
     return declare([LayoutWidget,TemplatedMixin,WidgetsInTemplateMixin],{
         templateString:appTemplate,
         addView:function (view) {
@@ -30,6 +31,11 @@ define([
         layout:function(){
             var size = domGeometry.getContentBox(this.domNode);
             this.borderContainerNode.resize({w:size.w,h:size.h});
+        },
+        logout:function(){
+            Stores.users.logout().then(function(){
+                location.reload();
+            });
         }
     })
 })

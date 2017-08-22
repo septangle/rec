@@ -1,8 +1,9 @@
 define([
+    'dojo/when',
     'dojo/request',
     'dstore/Memory',
     'dojo/_base/declare',
-],function (request, Memory, declare) {
+],function (when, request, Memory, declare) {
     return declare([],{
 
         headers: { 'Content-Type': 'application/json' },
@@ -30,6 +31,9 @@ define([
                 }
                 return data.photoMemberDto;
             })
+        },
+        logout:function(){
+            return request.post(dojoConfig.basePath+"/member/logout",{headers:this.headers});
         }
     })
 })

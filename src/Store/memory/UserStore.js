@@ -1,7 +1,8 @@
 define([
+    'dojo/when',
     'dstore/Memory',
     'dojo/_base/declare',
-],function (Memory, declare) {
+],function (when, Memory, declare) {
     return declare([Memory],{
         data:[
             {
@@ -23,6 +24,9 @@ define([
         },
         register:function(user){
             return this.put(user);
+        },
+        logout:function () {
+            return when(true);
         }
     })
 })

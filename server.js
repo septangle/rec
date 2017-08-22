@@ -94,6 +94,11 @@ function databaseInitialize() {
         }
     });
 
+    app.post('/photo-web/member/logout', function(req, res){
+        req.session.user = null;
+        res.sendStatus(200);
+    });
+
     app.get('/photo-web/scan/',function (req,res) {
         var user = req.session.user;
         var list = scans.find({userId:user.id});
