@@ -3,6 +3,7 @@ var rq = require('request-promise');;
 var path =require('path');
 var fs = require('fs');
 var Q  = require('q');
+var mime = require('mime-types')
 
 var baseUrl = 'https://beta.benaco.com/api/beta';
 var apiKey = "3c7c6941-2204-4ee7-a4b5-0981e0e6e09c";
@@ -33,17 +34,24 @@ module.exports= {
         };
 
         pics.forEach(function (item,index) {
-            formData["photo"+(index+1)]= fs.createReadStream(item);
+            console.log(item,index);
+            formData["photo"+(index+1)]= {
+                value:fs.createReadStream(item),
+                options:{
+                    contentType: mime.lookup(item),
+                    filename : path.basename(item)
+                }
+            };
         })
+
 
         return rq(
             {
                 method: 'POST',
                 uri:baseUrl+'/scans/id/'+scanId+'/add-photos',
-                form: formData
+                formData: formData
             }
         )
-
     },
     startProcessing: function (scanId) {
 
