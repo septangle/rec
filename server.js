@@ -113,6 +113,10 @@ function databaseInitialize() {
             }
             res.json(list);
             res.end();
+        },function(err){
+            res.status(500);
+            res.json(err);
+            res.end();
         })
     })
 
