@@ -42,6 +42,10 @@ define([
             }));
         },
 
+        removeItem:function(id){
+
+        },
+
         setStore:function(store){
             this.store = store;
             this.refresh();

@@ -1,4 +1,6 @@
 define([
+    'dojo/_base/array',
+    'dojo/text!./templates/ImageIndicator.html',
     'dojo/when',
     '../components/LoaderMixin',
     '../components/FileUploader',
@@ -17,13 +19,10 @@ define([
     "dojo/_base/declare",
     'dijit/form/ValidationTextBox',
     'xstyle/css!./css/ScanDetail.css'
-],function (when, LoaderMixin, FileUploader, Dialog, on, domClass, Memory, StoreContainer, List, Container, Stores, WidgetsInTemplateMixin, scancreateTemplate, TemplatedMixin, WidgetBase, declare) {
+],function (array, imageindicatorTemplate, when, LoaderMixin, FileUploader, Dialog, on, domClass, Memory, StoreContainer, List, Container, Stores, WidgetsInTemplateMixin, scancreateTemplate, TemplatedMixin, WidgetBase, declare) {
 
     var Image= declare([WidgetBase,TemplatedMixin],{
-        templateString:"<div class='photo'><img data-dojo-attach-point='imageNode'></div>",
-        _setImageAttr:function (image) {
-            this.imageNode.src = image || require.toUrl('angrui/css/images/hotel.jpg');
-        }
+        templateString:imageindicatorTemplate
     })
 
 
@@ -40,32 +39,40 @@ define([
         startup:function(){
             this.inherited(arguments);
             var _t=this;
+            this.files= new Memory({data:[],idProperty:'name'});
             this.imgList = new StoreContainer({
                 insertChildIndex:-1,
-                // store: new Memory({data:scan.photos}), // a dstore collection
+                store: this.files.sort('name',true), // a dstore collection
                 renderItem: function (item) {
                     return new Image({
-                        image:item.image,
                         name:item.name
                     });
                 }
             },this.imgList);
             this.imgList.startup();
 
+            on(_t.uploadFile, "change", function() {
+                _t.addFiles(_t.uploadFile.files);
+            });
+            on(this.uploadButton, "click", function(event) {
+                _t.uploadFile.click();
+            });
         },
         refresh:function () {
             var _t=this;
-            var p = when(this.scanId && Stores.scans.get(this.scanId)).then(function (scan) {
-                return _t.imgList.setStore(new Memory({data:scan.photos}))
-            })
+            var p = _t.imgList.refresh();
             this._requestLoader(p)
 
         },
         upload:function(){
 
         },
-        addFile:function(){
-
+        addFiles:function(files){
+            var _t=this;
+            array.forEach(files,function (item) {
+                _t.files.putSync(item);
+            })
+            _t.imgList.refresh();
         },
         selectFiles:function(){
 

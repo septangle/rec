@@ -5,11 +5,16 @@
         <div class="input-container"  data-dojo-type="dijit/form/ValidationTextBox" data-dojo-attach-point="scanTitle"></div>
     </div>
     <div class="image-list" data-dojo-attach-point="imgList">
-        <div  class='photo upload-btn' data-dojo-attach-event="click:selectFiles">
-            <img  src="${plusIcon}" alt="" >
+        <div class="photo" data-dojo-attach-point="uploadButton">
+            <div class="image">
+                <div class="add-btn">
+                    <i class="fa fa-5x fa-plus-square-o" style="position: relative;top: 25px;"></i>
+                </div>
+            </div>
         </div>
     </div>
     <div class="button-bar">
+        <input type="file" style="display: none;" multiple="" data-dojo-attach-point="uploadFile" />
         <button class="btn" data-dojo-attach-event="click:startProcess">上传</button>
         <button class="btn" data-dojo-attach-event="click:startProcess">开始处理</button>
     </div>

@@ -49,16 +49,26 @@
 .ScanDetail .image-list .photo {
   display: inline-block;
   margin: 5px;
+  position: relative;
 }
-.ScanDetail .image-list .photo img {
+.ScanDetail .image-list .photo .image {
+  text-align: center;
+  line-height: 150px;
+  display: block;
+  color: #fff;
+  background: #009eff;
   height: 150px;
   width: 150px;
 }
-.ScanDetail .image-list .photo.add-btn {
-  cursor: pointer;
-}
-.ScanDetail .image-list .upload-btn {
-  cursor: pointer;
+.ScanDetail .image-list .photo .name {
+  color: #2b2a2a;
+  position: absolute;
+  bottom: 0;
+  background: #fff;
+  padding: 10px;
+  width: 100%;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.8);
 }
 .ScanDetail .button-bar {
   text-align: right;
@@ -80,4 +90,32 @@
 }
 .ScanDetail .btn:hover {
   box-shadow: 0px 2px 15px rgba(0,0,0,0.25);
+}
+.ScanDetail .add-btn {
+  cursor: pointer;
+  text-align: center;
+  display: block;
+  color: #fff;
+}
+.ScanDetail .add-btn::before {
+  border-top: 15px solid #fff;
+  border-left: 15px solid transparent;
+}
+.ScanDetail .add-btn::after {
+  border-bottom: 15px solid #0076bf;
+  border-right: 15px solid transparent;
+}
+.ScanDetail .add-btn::before,
+.ScanDetail .add-btn::after {
+  width: 0;
+  height: 0;
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  transition: 0.5s ease-out border-width;
+}
+.ScanDetail .add-btn:hover::before,
+.ScanDetail .add-btn:hover::after {
+  border-width: 30px;
 }
