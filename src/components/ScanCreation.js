@@ -65,14 +65,18 @@ define([
 
         },
         upload:function(){
-
+            var files = this.files.sort('name',true).fetchSync();
+            var formData = new FormData();
+            formData.append("title", this.scanTitle.get('value'));
+            formData.append("file", files);
+            return Stores.scans.upload(formData);
         },
         addFiles:function(files){
             var _t=this;
             array.forEach(files,function (item) {
                 _t.files.putSync(item);
             })
-            _t.imgList.refresh();
+            _t.refresh();
         },
         selectFiles:function(){
 
