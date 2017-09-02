@@ -47,19 +47,29 @@ define([
             this.inherited(arguments);
             this.refresh();
             var _t=this;
+            on(this.allTab,'click',function () {
+                domClass.toggle(_t.allTab,'selected',true);
+                domClass.toggle(_t.prepareTab,'selected',false);
+                domClass.toggle(_t.finishedTab,'selected',false);
+                domClass.toggle(_t.processingTab,'selected',false); //TODO
+                _t.setStore(Stores.scans);
+            });
             on(this.prepareTab,'click',function () {
+                domClass.toggle(_t.allTab,'selected',false);
                 domClass.toggle(_t.prepareTab,'selected',true);
                 domClass.toggle(_t.finishedTab,'selected',false);
                 domClass.toggle(_t.processingTab,'selected',false); //TODO
                 _t.setStore(Stores.scans.filter({status:'uploadingPhotos'}));
             });
             on(this.finishedTab,'click',function () {
+                domClass.toggle(_t.allTab,'selected',false);
                 domClass.toggle(_t.prepareTab,'selected',false);
                 domClass.toggle(_t.finishedTab,'selected',true);
                 domClass.toggle(_t.processingTab,'selected',false); //TODO
                 _t.setStore(Stores.scans.filter({status:'completed'}));
             });
             on(this.processingTab,'click',function () {
+                domClass.toggle(_t.allTab,'selected',false);
                 domClass.toggle(_t.prepareTab,'selected',false);
                 domClass.toggle(_t.finishedTab,'selected',false);
                 domClass.toggle(_t.processingTab,'selected',true); //TODO
@@ -92,7 +102,7 @@ define([
         },
 
         refresh:function(){//TODO performance
-            this.setStore(this.store || Stores.scans.filter({status:'completed'}));
+            this.setStore(this.store || Stores.scans);
         },
 
 

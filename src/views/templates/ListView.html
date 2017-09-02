@@ -2,7 +2,8 @@
     <div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'sidebar', gutters:true" data-dojo-attach-point="borderContainerNode">
         <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'leading'" class="side-bar" >
             <div class="tab-list">
-                <div class="tab selected" data-dojo-attach-point="finishedTab"><span class="tab-icon"><i class="fa fa-file-image-o"></i></span><span class="tab-label">已完成</span></div>
+                <div class="tab selected" data-dojo-attach-point="allTab"><span class="tab-icon"><i class="fa fa-file-image-o"></i></span><span class="tab-label">全部</span></div>
+                <div class="tab" data-dojo-attach-point="finishedTab"><span class="tab-icon"><i class="fa fa-file-image-o"></i></span><span class="tab-label">已完成</span></div>
                 <div class="tab" data-dojo-attach-point="processingTab"><span class="tab-icon"><i class="fa fa-file-image-o"></i></span><span class="tab-label">处理中</span></div>
                 <div class="tab" data-dojo-attach-point="prepareTab"><span class="tab-icon"><i class="fa fa-file-image-o"></i></span><span class="tab-label">未处理</span></div>
             </div>
@@ -13,7 +14,6 @@
                 <button class="btn" data-dojo-attach-event="click:newScan"><i class="fa fa-plus"></i><span class="btn-label">新建场景</span></button>
             </div>
             <div data-dojo-type='dijit/layout/_LayoutWidget' data-dojo-mixins='dijit/_Container'data-dojo-attach-point="container" class="scanList">
-
             </div>
         </div>
     </div>

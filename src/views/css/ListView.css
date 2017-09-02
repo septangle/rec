@@ -26,7 +26,6 @@
   border-left: 2px solid #fff;
 }
 .ListView .scanList {
-  padding-top: 20px;
   overflow: auto;
   margin: auto;
 }
