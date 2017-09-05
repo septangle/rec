@@ -1,4 +1,5 @@
 define([
+    'dijit/form/NumberTextBox',
     'dojo/_base/array',
     'dojo/text!./templates/ImageIndicator.html',
     'dojo/when',
@@ -18,8 +19,9 @@ define([
     'dijit/_WidgetBase',
     "dojo/_base/declare",
     'dijit/form/ValidationTextBox',
-    'xstyle/css!./css/ScanDetail.css'
-],function (array, imageindicatorTemplate, when, LoaderMixin, FileUploader, Dialog, on, domClass, Memory, StoreContainer, List, Container, Stores, WidgetsInTemplateMixin, scancreateTemplate, TemplatedMixin, WidgetBase, declare) {
+    'xstyle/css!./css/ScanDetail.css',
+    "angrui/components/Select"
+],function (NumberTextBox, array, imageindicatorTemplate, when, LoaderMixin, FileUploader, Dialog, on, domClass, Memory, StoreContainer, List, Container, Stores, WidgetsInTemplateMixin, scancreateTemplate, TemplatedMixin, WidgetBase, declare) {
 
     var Image= declare([WidgetBase,TemplatedMixin],{
         templateString:imageindicatorTemplate
@@ -57,6 +59,9 @@ define([
             on(this.uploadButton, "click", function(event) {
                 _t.uploadFile.click();
             });
+            on(_t.scanType,'change',function (val) {
+                domClass.toggle(_t.pointNum,'hidden',val == '3D');
+            })
         },
         refresh:function () {
             var _t=this;
@@ -67,9 +72,11 @@ define([
         upload:function(){
             var files = this.files.sort('name',true).fetchSync();
             var formData = new FormData();
+            var type =  this.scanType.get('value');
             formData.append("title", this.scanTitle.get('value'));
+            type === '2D' && formData.append("unitNum", this.unitNumber.get('value'));
             formData.append("file", files);
-            return Stores.scans.upload(formData);
+            return Stores.scans.upload(formData,type);
         },
         addFiles:function(files){
             var _t=this;

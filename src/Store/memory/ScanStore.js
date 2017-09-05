@@ -1,8 +1,9 @@
 define([
+    'dojo/when',
     'dojo/Deferred',
     'dojo/_base/declare',
     'dstore/Memory'
-],function (Deferred, declare, Memory) {
+],function (when, Deferred, declare, Memory) {
     return declare([Memory],{
         addImage:function(scanId,formData){
             var fileName = formData.get('file').name;
@@ -32,5 +33,9 @@ define([
             scan.status= "processing";
             return this.put(scan);
         },
+        upload:function(form,type){
+            console.log(form,type);
+            return when(true);
+        }
     })
 })

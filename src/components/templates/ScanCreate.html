@@ -4,6 +4,17 @@
         <div class="input-label" >场景名称</div>
         <div class="input-container"  data-dojo-type="dijit/form/ValidationTextBox" data-dojo-attach-point="scanTitle"></div>
     </div>
+    <div class="input-group">
+        <div class="input-label" >图片类型</div>
+        <select class="input-container" data-dojo-attach-point="scanType" data-dojo-props="value:'3D'" data-dojo-type="angrui/components/Select" value="">
+            <option >2D</option>
+            <option >3D</option>
+        </select>
+    </div>
+    <div class="input-group hidden" data-dojo-attach-point="pointNum">
+        <div class="input-label" >单点张数</div>
+        <div class="input-container"  data-dojo-type="dijit/form/NumberTextBox" data-dojo-attach-point="unitNumber"></div>
+    </div>
     <div class="image-list" data-dojo-attach-point="imgList">
         <div class="photo" data-dojo-attach-point="uploadButton">
             <div class="image">
@@ -15,7 +26,7 @@
     </div>
     <div class="button-bar">
         <input type="file" style="display: none;" multiple="" data-dojo-attach-point="uploadFile" />
-        <button class="btn" data-dojo-attach-event="click:startProcess">上传</button>
+        <button class="btn" data-dojo-attach-event="click:upload">上传</button>
         <button class="btn" data-dojo-attach-event="click:startProcess">开始处理</button>
     </div>
 </div>

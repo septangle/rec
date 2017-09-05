@@ -17,5 +17,8 @@ define(['dojo/request',
                 handleAs: "json",
             })
         },
+        upload:function(form,type){
+
+        }
     })
 })

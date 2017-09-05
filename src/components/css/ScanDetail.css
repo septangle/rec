@@ -42,7 +42,7 @@
 }
 .ScanDetail .image-list {
   min-height: 350px;
-  min-width: 450px;
+  min-width: 500px;
   margin: 30px;
   border: 1px solid #d3d3d3;
 }
@@ -61,6 +61,7 @@
   width: 150px;
 }
 .ScanDetail .image-list .photo .name {
+  font-size: 8px;
   color: #2b2a2a;
   position: absolute;
   bottom: 0;
@@ -118,4 +119,7 @@
 .ScanDetail .add-btn:hover::before,
 .ScanDetail .add-btn:hover::after {
   border-width: 30px;
+}
+.ScanDetail .hidden {
+  visibility: hidden !important;
 }
