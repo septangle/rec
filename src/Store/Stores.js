@@ -42,7 +42,10 @@ define([
             })
         },
 
-        scans : new ScanStore()
+        scans : new ScanStore(),
+
+
+        
 
     }
 })

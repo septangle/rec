@@ -25,7 +25,7 @@ define([
             })
         },
         current:function(){
-            return request.get(dojoConfig.basePath+"/member/current",{headers:this.headers}).then(function (data) {
+            return request.get(dojoConfig.basePath+"/member/getCurrMember",{headers:this.headers}).then(function (data) {
                 if(data.error){
                     throw data.error
                 }
