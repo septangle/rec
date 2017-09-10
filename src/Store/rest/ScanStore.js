@@ -50,7 +50,7 @@ define(['dojo/request',
             })
         },
 
-        getScans:function () {
+        getScans:function (status) {
             return request.get(dojoConfig.basePath+"/photoscan/getCurrMemberScan.do",
                 {
                     headers:this.headers,

@@ -84,7 +84,7 @@ function databaseInitialize() {
         }
     });
 
-    app.get('/photo-web/member/current', function(req, res){
+    app.get('/photo-web/member/getCurrMember', function(req, res){
         var user = req.session.user;
         if(user){
             res.json({photoMemberDto:user});
@@ -99,7 +99,7 @@ function databaseInitialize() {
         res.sendStatus(200);
     });
 
-    app.get('/photo-web/scan/',function (req,res) {
+    app.get('/photo-web/photoscan/getCurrMemberScan',function (req,res) {
         var user = req.session.user;
         var list = scans.find({userId:user.id});
         Q.all(list.map(function (scan) {
@@ -140,10 +140,19 @@ function databaseInitialize() {
         })
     })
 
-    app.post('/photo-web/scan/',function (req,res) {
+    app.post('/photo-web/engine/addPanoramicPhotos.do',function (req,res) {
         var user = req.session.user;
         var title = req.body.title;
+        var files = req.files;
+
         api.addScan(title).then(function (scanId) {
+            var scan = {userId:user.id,id:scanId, title: title , photos:[]};
+            files.forEach(function (f) {
+                scan.photos.push({
+                    image:path.join('/upload/images',path.relative(uploadFolder,f.path)),
+                    $dataPath:f.path,
+                })
+            })
             scans.insert({userId:user.id,id:scanId, title: title , photos:[]});
             res.json({id:scanId});
             res.end();
@@ -154,15 +163,10 @@ function databaseInitialize() {
         });
     })
 
-    app.get('/photo-web/scan/:id', function (req, res) {
+    app.get('/photo-web/engine/queryScanStatus.do', function (req, res) {
         var user = req.session.user;
-        var scan = scans.find({id:req.params.id})[0];
         if(scan){
-            if(scan.status && scan.status.status == "completed" ){//no need fetch anymore
-                res.json(scan);
-                res.end();
-            }
-            api.scanStatus(scan.id).then(function (status) {
+            api.scanStatus(req.body.panoramaEngineDto.benacoScanId).then(function (status) {
                 scan.status = status;
                 if(status.status == "completed"){
                     scans.update(scan);
@@ -177,22 +181,16 @@ function databaseInitialize() {
         }
     });
 
-    app.delete('/photo-web/scan/:id', function (req, res) {
-        scans.findAndRemove({id:req.params.id});
+    app.post('/photo-web/photoscan/deletePhotoScan.do', function (req, res) {
+        scans.findAndRemove({id:req.body.PhotoScanDto.id});
         res.sendStatus(200);
     });
 
     app.post('/photo-web/scan/:id/images', upload, function (req, res) {
-        var files = req.files;
+
         var user = req.session.user;
         var scan = scans.find({id:req.params.id})[0];
-        files.forEach(function (f) {
-            scan.photos.push({
-                image:path.join('/upload/images',path.relative(uploadFolder,f.path)),
-                $dataPath:f.path,
-            })
-            scans.update(scan);
-        })
+
 
 
         console.log(req.body);
@@ -201,7 +199,7 @@ function databaseInitialize() {
     });
 
 
-    app.post('/photo-web/scan/:id/startProcess', function (req, res) {
+    app.post('/photo-web/engine/startProcessing.do', function (req, res) {
         var user = req.session.user;
         var scan = scans.find({id:req.params.id})[0];
         var files = scan.photos.map(function(p){
