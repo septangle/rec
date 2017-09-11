@@ -48,6 +48,17 @@
         background #009EFF
         height: 150px;
         width: 150px
+      .remove-btn
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 5px;
+        color: white;
+        cursor pointer
+        display: none
+      &:hover
+        .remove-btn
+          display block;
       .name
         font-size 8px
         color #2b2a2a
@@ -70,7 +81,13 @@
     font-size: 16px;
     color: #FFFFFF;
     letter-spacing: 0;
-    line-height: 16px;
+    line-height: 35px;
+    text-align: center;
+    cursor: pointer;
+    &.dijitDisabled
+      cursor: not-allowed;
+      background: lightgray;
+      box-shadow : none !important
     &:focus
       outline:none
     &:hover
@@ -80,25 +97,26 @@
     text-align: center;
     display: block;
     color: white;
-    &::before
-      border-top: 15px solid white;
-      border-left: 15px solid transparent;
-    &::after
-      border-bottom: 15px solid #0076bf;
-      border-right: 15px solid transparent;
-    &::before
-    &::after
-      width: 0;
-      height: 0;
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      transition: 0.5s ease-out border-width;
+    //&::before
+    //  border-top: 15px solid white;
+    //  border-left: 15px solid transparent;
+    //&::after
+    //  border-bottom: 15px solid #0076bf;
+    //  border-right: 15px solid transparent;
+    //&::before
+    //&::after
+    //  width: 0;
+    //  height: 0;
+    //  content: '';
+    //  position: absolute;
+    //  top: 0;
+    //  right: 0;
+    //  transition: 0.5s ease-out border-width;
     &:hover
       &::before
       &::after
         border-width 30px;
+
 
   .hidden
     visibility: hidden !important

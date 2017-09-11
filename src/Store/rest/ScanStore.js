@@ -8,7 +8,8 @@ define(['dojo/request',
             return request.post(dojoConfig.basePath+"/engine/addPanoramicPhotos.do",
                 {
                     headers:this.headers,
-                    data:JSON.stringify({panoramaEngineDto:data}) //TODO
+                    handleAs:'json',
+                    data:data //TODO
                 }
             ).then(function (data) {
                 if(data.error){
@@ -22,6 +23,7 @@ define(['dojo/request',
             return request.post(dojoConfig.basePath+"/photoscan/deletePhotoScan.do",
                 {
                     headers:this.headers,
+                    handleAs:'json',
                     data:JSON.stringify({photoScanDto:{
                         id:id
                     }})
@@ -38,6 +40,7 @@ define(['dojo/request',
             return request.post(dojoConfig.basePath+"/engine/queryScanStatus.do",
                 {
                     headers:this.headers,
+                    handleAs:'json',
                     data:JSON.stringify({panoramaEngineDto:{
                         benacoScanId:benacoScanId
                     }})
@@ -54,6 +57,7 @@ define(['dojo/request',
             return request.get(dojoConfig.basePath+"/photoscan/getCurrMemberScan.do",
                 {
                     headers:this.headers,
+                    handleAs:'json',
                 }
             ).then(function (data) {
                 if(data.error){
@@ -66,6 +70,7 @@ define(['dojo/request',
             return request.post(dojoConfig.basePath+"/engine/startProcessing.do",
                 {
                     headers:this.headers,
+                    handleAs:'json',
                     data:JSON.stringify({panoramaEngineDto:{
                         benacoScanId:benacoScanId
                     }})

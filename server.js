@@ -30,8 +30,8 @@ fsExtra.ensureDirSync(uploadFolder);
 
 var Storage = multer.diskStorage({
     destination: function(req, file, callback) {
-        fsExtra.ensureDirSync(path.resolve(uploadFolder,req.params.id));
-        callback(null, path.resolve(uploadFolder,req.params.id));
+        fsExtra.ensureDirSync(path.resolve(uploadFolder,req.session.user.id));
+        callback(null, path.resolve(uploadFolder,req.session.user.id));
     },
     filename: function(req, file, callback) {
         callback(null,file.originalname);
@@ -39,7 +39,7 @@ var Storage = multer.diskStorage({
 });
 var upload = multer({
     storage: Storage
-}).array("file");
+}).array("panoramaEngineDto.files");
 
 
 function databaseInitialize() {
@@ -99,7 +99,7 @@ function databaseInitialize() {
         res.sendStatus(200);
     });
 
-    app.get('/photo-web/photoscan/getCurrMemberScan',function (req,res) {
+    app.get('/photo-web/photoscan/getCurrMemberScan.do',function (req,res) {
         var user = req.session.user;
         var list = scans.find({userId:user.id});
         Q.all(list.map(function (scan) {
@@ -131,7 +131,9 @@ function databaseInitialize() {
                     return status.indexOf(scan.status.status)>=0;
                 })
             }
-            res.json(list);
+            res.json({
+                photoScanDtoList:list
+            });
             res.end();
         },function(err){
             res.status(500);
@@ -140,9 +142,9 @@ function databaseInitialize() {
         })
     })
 
-    app.post('/photo-web/engine/addPanoramicPhotos.do',function (req,res) {
+    app.post('/photo-web/engine/addPanoramicPhotos.do',upload, function (req,res) {
         var user = req.session.user;
-        var title = req.body.title;
+        var title = req.body.panoramaEngineDto.title;
         var files = req.files;
 
         api.addScan(title).then(function (scanId) {
@@ -154,10 +156,10 @@ function databaseInitialize() {
                 })
             })
             scans.insert({userId:user.id,id:scanId, title: title , photos:[]});
-            res.json({id:scanId});
+            res.json({panoramaEngineDto:{benacoScanId:scanId}});
             res.end();
         },function (err) {
-            res.sendStatus(500);
+            res.status(500);
             res.json(err.error);
             res.end();
         });

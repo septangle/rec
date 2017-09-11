@@ -24,7 +24,8 @@ define([
 ],function (NumberTextBox, array, imageindicatorTemplate, when, LoaderMixin, FileUploader, Dialog, on, domClass, Memory, StoreContainer, List, Container, Stores, WidgetsInTemplateMixin, scancreateTemplate, TemplatedMixin, WidgetBase, declare) {
 
     var Image= declare([WidgetBase,TemplatedMixin],{
-        templateString:imageindicatorTemplate
+        templateString:imageindicatorTemplate,
+
     })
 
 
@@ -46,13 +47,18 @@ define([
                 insertChildIndex:-1,
                 store: this.files.sort('name',true), // a dstore collection
                 renderItem: function (item) {
+                    var _t=this;
                     return new Image({
-                        name:item.name
+                        name:item.name,
+                        remove:function(){
+                            _t.store.removeSync(item.name);
+                            _t.refresh();
+                        }
                     });
                 }
             },this.imgList);
             this.imgList.startup();
-
+            _t.createBtn.startup();
             on(_t.uploadFile, "change", function() {
                 _t.addFiles(_t.uploadFile.files);
             });
@@ -61,22 +67,37 @@ define([
             });
             on(_t.scanType,'change',function (val) {
                 domClass.toggle(_t.pointNum,'hidden',val == '3D');
-            })
+            });
+            _t.createBtn.onClick = _t.createBtn.__onClick = function () {
+                _t.upload();
+            };
+            on(_t.startBtn.domNode,'click',function () {
+                _t.startProcess();
+            });
+            this.refresh();
         },
         refresh:function () {
             var _t=this;
             var p = _t.imgList.refresh();
-            this._requestLoader(p)
-
+            this._requestLoader(p);
+            _t.createBtn.set({'disabled':_t.benacoScanId});
+            _t.startBtn.set({'disabled':!_t.benacoScanId});
         },
         upload:function(){
             var files = this.files.sort('name',true).fetchSync();
             var formData = new FormData();
             var type =  this.scanType.get('value');
-            formData.append("title", this.scanTitle.get('value'));
+            formData.append("panoramaEngineDto.title", this.scanTitle.get('value'));
             type === '2D' && formData.append("unitNum", this.unitNumber.get('value'));
-            formData.append("file", files);
-            return Stores.scans.upload(formData,type);
+            array.forEach(files,function (f) {
+                formData.append("panoramaEngineDto.files", f);
+            })
+            var _t=this;
+            var p = Stores.scans.addScan(formData,type).then(function (engineDto) {
+                _t.benacoScanId = engineDto.benacoScanId;
+                _t.refresh();
+            });
+            return this._requestLoader(p);
         },
         addFiles:function(files){
             var _t=this;
@@ -91,7 +112,7 @@ define([
         startProcess:function(){
             //TODO disable when have no scanId
             var _t=this;
-            var p = Stores.scans.startProcess(this.scanId).then(function () {
+            var p = Stores.scans.startProcess(this.benacoScanId).then(function () {
                 _t.finished();
             });
             this._requestLoader(p)

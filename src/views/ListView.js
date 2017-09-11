@@ -1,4 +1,6 @@
 define([
+    'dijit/registry',
+    'dojo/query',
     'dojo/dom-class',
     '../components/LoaderMixin',
     '../components/ScanDetail',
@@ -28,11 +30,11 @@ define([
     "dijit/form/Form",
     "dijit/layout/BorderContainer",
     "dijit/layout/ContentPane"
-],function (domClass, LoaderMixin, ScanDetail, window, domStyle, on, lang, ScanCreation, Dialog, Button, Container, Stores, ScanBox, LayoutContainer, LayoutWidget, domGeometry, WidgetBase, WidgetsInTemplateMixin, listviewTemplate, TemplatedMixin, declare) {
+],function (registry, query, domClass, LoaderMixin, ScanDetail, window, domStyle, on, lang, ScanCreation, Dialog, Button, Container, Stores, ScanBox, LayoutContainer, LayoutWidget, domGeometry, WidgetBase, WidgetsInTemplateMixin, listviewTemplate, TemplatedMixin, declare) {
     return declare([LayoutWidget,TemplatedMixin,WidgetsInTemplateMixin,LoaderMixin],{
         templateString:listviewTemplate,
 
-        store:null,
+        status:'all',
 
         layout:function(){
             var size = domGeometry.getContentBox(this.domNode);
@@ -45,56 +47,35 @@ define([
 
         startup:function(){
             this.inherited(arguments);
-            this.refresh();
             var _t=this;
-            on(this.allTab,'click',function () {
-                domClass.toggle(_t.allTab,'selected',true);
-                domClass.toggle(_t.prepareTab,'selected',false);
-                domClass.toggle(_t.finishedTab,'selected',false);
-                domClass.toggle(_t.processingTab,'selected',false); //TODO
-                _t.status=null;
-            });
-            on(this.prepareTab,'click',function () {
-                domClass.toggle(_t.allTab,'selected',false);
-                domClass.toggle(_t.prepareTab,'selected',true);
-                domClass.toggle(_t.finishedTab,'selected',false);
-                domClass.toggle(_t.processingTab,'selected',false); //TODO
-                _t.status='uploadingPhotos';
-            });
-            on(this.finishedTab,'click',function () {
-                domClass.toggle(_t.allTab,'selected',false);
-                domClass.toggle(_t.prepareTab,'selected',false);
-                domClass.toggle(_t.finishedTab,'selected',true);
-                domClass.toggle(_t.processingTab,'selected',false); //TODO
-                _t.status='completed';
-            });
-            on(this.processingTab,'click',function () {
-                domClass.toggle(_t.allTab,'selected',false);
-                domClass.toggle(_t.prepareTab,'selected',false);
-                domClass.toggle(_t.finishedTab,'selected',false);
-                domClass.toggle(_t.processingTab,'selected',true); //TODO
-                _t.status='processing';
+
+            query('.tab-list .tab').forEach(function (tab) {
+                tab = registry.byNode(tab);
+                on(tab,'click',function () {
+                    query('.tab-list .tab').forEach(function (tab) {
+                        domClass.remove(tab,'selected');
+                    })
+                    domClass.add(tab.domNode,'selected');
+                    _t.status = tab.status;
+                    _t.refresh();
+                });
             })
-            Stores.scans.on('update,delete,add',function () {
-                _t.refresh();
-            })
+            this.refresh();
+
         },
 
         refresh:function () {
             var _t=this;
-            Stores.scans.getScans().then(function (scans) {
-                scans.filter(function (scan) {
-                    scan.status == _t.status;
+
+
+            var p = Stores.scans.getScans().then(function (scans) {
+                scans = scans.filter(function (scan) {
+                    return _t.status == 'all' || scan.status == _t.status;
                 })
-                
-            })
-            var _t=this;
-            //listeners
-            this.store = store;
-            _t.container.getChildren().forEach(function(c){
-                _t.container.removeChild(c)
-            });
-            var p = this.store.fetch().then(function (scans) {
+                //listeners
+                _t.container.getChildren().forEach(function(c){
+                    _t.container.removeChild(c)
+                });
                 scans.forEach(function(scan){
                     _t.container.addChild(new ScanBox({
                         scanId:scan.id,
@@ -105,12 +86,11 @@ define([
                     }));
                 })
             });
+
             this._requestLoader(p)
         },
 
-        refresh:function(){//TODO performance
-            this.setStore(this.store || Stores.scans);
-        },
+
 
 
         newScan:function(){

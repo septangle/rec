@@ -60,6 +60,18 @@
   height: 150px;
   width: 150px;
 }
+.ScanDetail .image-list .photo .remove-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: none;
+}
+.ScanDetail .image-list .photo:hover .remove-btn {
+  display: block;
+}
 .ScanDetail .image-list .photo .name {
   font-size: 8px;
   color: #2b2a2a;
@@ -84,7 +96,14 @@
   font-size: 16px;
   color: #fff;
   letter-spacing: 0;
-  line-height: 16px;
+  line-height: 35px;
+  text-align: center;
+  cursor: pointer;
+}
+.ScanDetail .btn.dijitDisabled {
+  cursor: not-allowed;
+  background: #d3d3d3;
+  box-shadow: none !important;
 }
 .ScanDetail .btn:focus {
   outline: none;
@@ -97,24 +116,6 @@
   text-align: center;
   display: block;
   color: #fff;
-}
-.ScanDetail .add-btn::before {
-  border-top: 15px solid #fff;
-  border-left: 15px solid transparent;
-}
-.ScanDetail .add-btn::after {
-  border-bottom: 15px solid #0076bf;
-  border-right: 15px solid transparent;
-}
-.ScanDetail .add-btn::before,
-.ScanDetail .add-btn::after {
-  width: 0;
-  height: 0;
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  transition: 0.5s ease-out border-width;
 }
 .ScanDetail .add-btn:hover::before,
 .ScanDetail .add-btn:hover::after {

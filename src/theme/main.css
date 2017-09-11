@@ -261,7 +261,6 @@ td.dijitButtonContents {
 }
 .dijitButtonNode {
 /* Node that is acting as a button -- may or may not be a BUTTON element */
-  border: 1px solid #808080;
   margin: 0;
   line-height: normal;
   vertical-align: middle;
