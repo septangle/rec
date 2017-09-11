@@ -52,35 +52,42 @@ define([
                 domClass.toggle(_t.prepareTab,'selected',false);
                 domClass.toggle(_t.finishedTab,'selected',false);
                 domClass.toggle(_t.processingTab,'selected',false); //TODO
-                _t.setStore(Stores.scans);
+                _t.status=null;
             });
             on(this.prepareTab,'click',function () {
                 domClass.toggle(_t.allTab,'selected',false);
                 domClass.toggle(_t.prepareTab,'selected',true);
                 domClass.toggle(_t.finishedTab,'selected',false);
                 domClass.toggle(_t.processingTab,'selected',false); //TODO
-                _t.setStore(Stores.scans.filter({status:'uploadingPhotos'}));
+                _t.status='uploadingPhotos';
             });
             on(this.finishedTab,'click',function () {
                 domClass.toggle(_t.allTab,'selected',false);
                 domClass.toggle(_t.prepareTab,'selected',false);
                 domClass.toggle(_t.finishedTab,'selected',true);
                 domClass.toggle(_t.processingTab,'selected',false); //TODO
-                _t.setStore(Stores.scans.filter({status:'completed'}));
+                _t.status='completed';
             });
             on(this.processingTab,'click',function () {
                 domClass.toggle(_t.allTab,'selected',false);
                 domClass.toggle(_t.prepareTab,'selected',false);
                 domClass.toggle(_t.finishedTab,'selected',false);
                 domClass.toggle(_t.processingTab,'selected',true); //TODO
-                _t.setStore(Stores.scans.filter({status:'processing,failed'}));
+                _t.status='processing';
             })
             Stores.scans.on('update,delete,add',function () {
                 _t.refresh();
             })
         },
 
-        setStore:function (store) {
+        refresh:function () {
+            var _t=this;
+            Stores.scans.getScans().then(function (scans) {
+                scans.filter(function (scan) {
+                    scan.status == _t.status;
+                })
+                
+            })
             var _t=this;
             //listeners
             this.store = store;

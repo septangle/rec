@@ -4,7 +4,7 @@ define(['dojo/request',
     'dojo/_base/declare'],function (request, Cache, Rest, declare) {
     return declare([],{
 
-        add:function (data) {
+        addScan:function (data) {
             return request.post(dojoConfig.basePath+"/engine/addPanoramicPhotos.do",
                 {
                     headers:this.headers,
@@ -18,7 +18,7 @@ define(['dojo/request',
             })
         },
 
-        remove:function (id) {
+        removeScan:function (id) {
             return request.post(dojoConfig.basePath+"/photoscan/deletePhotoScan.do",
                 {
                     headers:this.headers,
