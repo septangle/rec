@@ -76,13 +76,20 @@ function databaseInitialize() {
         console.log(req.session.user);
     });
 
+    // app.use("/",function (req,res,next) {
+    //     if(!req.session.user){
+    //         res.sendStatus(401);
+    //     }else{
+    //         next();
+    //     }
+    // });
+
     app.use("/",function (req,res,next) {
-        if(!req.session.user){
-            res.sendStatus(401);
-        }else{
-            next();
-        }
+        req.session.user = users.find({"tel":"demo"})[0];
+        next();
     });
+
+
 
     app.get('/photo-web/member/getCurrMember', function(req, res){
         var user = req.session.user;
@@ -144,7 +151,7 @@ function databaseInitialize() {
 
     app.post('/photo-web/engine/addPanoramicPhotos.do',upload, function (req,res) {
         var user = req.session.user;
-        var title = req.body.panoramaEngineDto.title;
+        var title = req.body['panoramaEngineDto.title'];
         var files = req.files;
 
         api.addScan(title).then(function (scanId) {
@@ -154,13 +161,15 @@ function databaseInitialize() {
                     image:path.join('/upload/images',path.relative(uploadFolder,f.path)),
                     $dataPath:f.path,
                 })
+                scan.thumb_image_path = path.join('/upload/images',path.relative(uploadFolder,f.path));
             })
-            scans.insert({userId:user.id,id:scanId, title: title , photos:[]});
+            scans.insert(scan);
             res.json({panoramaEngineDto:{benacoScanId:scanId}});
             res.end();
         },function (err) {
             res.status(500);
             res.json(err.error);
+            console.error(err);
             res.end();
         });
     })
@@ -203,7 +212,7 @@ function databaseInitialize() {
 
     app.post('/photo-web/engine/startProcessing.do', function (req, res) {
         var user = req.session.user;
-        var scan = scans.find({id:req.params.id})[0];
+        var scan = scans.find({id:req.body.panoramaEngineDto.benacoScanId})[0];
         var files = scan.photos.map(function(p){
             return p.$dataPath
         })

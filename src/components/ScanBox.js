@@ -34,17 +34,17 @@ define([
         },
 
         edit:function () {
-            var size = window.getBox();
-            var dialog = new Dialog({
-                content:new ScanDetail({
-                    scanId:this.scanId,
-                    style:"width:"+size.w*0.8+"px;",
-                    finished:function(){
-                        dialog.hide();
-                    }
-                }),
-            });
-            dialog.show()
+            // var size = window.getBox();
+            // var dialog = new Dialog({
+            //     content:new ScanDetail({
+            //         scanId:this.scanId,
+            //         style:"width:"+size.w*0.8+"px;",
+            //         finished:function(){
+            //             dialog.hide();
+            //         }
+            //     }),
+            // });
+            // dialog.show()
         },
 
         remove:function(){

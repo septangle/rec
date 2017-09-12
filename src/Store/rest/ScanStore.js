@@ -4,10 +4,11 @@ define(['dojo/request',
     'dojo/_base/declare'],function (request, Cache, Rest, declare) {
     return declare([],{
 
+        headers: { 'Content-Type': 'application/json' },
+
         addScan:function (data) {
             return request.post(dojoConfig.basePath+"/engine/addPanoramicPhotos.do",
                 {
-                    headers:this.headers,
                     handleAs:'json',
                     data:data //TODO
                 }
@@ -66,7 +67,7 @@ define(['dojo/request',
                 return data.photoScanDtoList;
             })
         },
-        startProcessing:function(benacoScanId){
+        startProcess:function(benacoScanId){
             return request.post(dojoConfig.basePath+"/engine/startProcessing.do",
                 {
                     headers:this.headers,
