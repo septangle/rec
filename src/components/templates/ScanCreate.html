@@ -24,6 +24,12 @@
             </div>
         </div>
     </div>
+    <div class="costMsg" data-dojo-attach-point="costMsg">
+        共 <span data-dojo-attach-point="picAmount"></span> 张图片,预计消费 <span data-dojo-attach-point="costAmount"></span> 元
+    </div>
+    <div class="errorMsg" data-dojo-attach-point="errorMsg">
+        当前余额 <span data-dojo-attach-point="leftMoney"></span>元，不足此次消费。
+    </div>
     <div class="button-bar">
         <input type="file" style="display: none;" multiple="" data-dojo-attach-point="uploadFile" />
         <button class="btn" data-dojo-type="dijit/form/Button" data-dojo-attach-point="createBtn">创建</button>

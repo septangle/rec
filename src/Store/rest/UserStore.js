@@ -48,6 +48,17 @@ define([
                 headers:this.headers,
                 handleAs:'json',
             });
+        },
+        getPrice:function () {
+            return request.get(dojoConfig.basePath+"/member/getPrice.do",{
+                headers:this.headers,
+                handleAs:'json',
+            }).then(function (data) {
+                if(data.error){
+                    throw data.error
+                }
+                return data.priceDto;
+            })
         }
     })
 })

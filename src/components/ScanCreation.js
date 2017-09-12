@@ -1,4 +1,5 @@
 define([
+    'dojo/dom-style',
     'dijit/form/NumberTextBox',
     'dojo/_base/array',
     'dojo/text!./templates/ImageIndicator.html',
@@ -21,7 +22,7 @@ define([
     'dijit/form/ValidationTextBox',
     'xstyle/css!./css/ScanDetail.css',
     "angrui/components/Select"
-],function (NumberTextBox, array, imageindicatorTemplate, when, LoaderMixin, FileUploader, Dialog, on, domClass, Memory, StoreContainer, List, Container, Stores, WidgetsInTemplateMixin, scancreateTemplate, TemplatedMixin, WidgetBase, declare) {
+],function (domStyle, NumberTextBox, array, imageindicatorTemplate, when, LoaderMixin, FileUploader, Dialog, on, domClass, Memory, StoreContainer, List, Container, Stores, WidgetsInTemplateMixin, scancreateTemplate, TemplatedMixin, WidgetBase, declare) {
 
     var Image= declare([WidgetBase,TemplatedMixin],{
         templateString:imageindicatorTemplate,
@@ -78,10 +79,27 @@ define([
         },
         refresh:function () {
             var _t=this;
-            var p = _t.imgList.refresh();
+            var p = _t.imgList.refresh().then(function () {
+                _t.createBtn.set({'disabled':_t.benacoScanId});
+                _t.startBtn.set({'disabled':!_t.benacoScanId});
+
+                var nums =  _t.files && _t.files.fetchSync().length;
+                return Stores.users.getPrice().then(function (data) {
+                    var balance = 100000;
+                    var count = data.price * nums;
+                    _t.costAmount.innerHTML = count;
+                    _t.picAmount.innerHTML = nums;
+                    _t.leftMoney.innerHTML= balance;
+                    domStyle.set(_t.costMsg,'display',(nums>0 && count <= balance ) ? 'block' :'none');
+                    domStyle.set(_t.errorMsg,'display',balance < count ? 'block' :'none');
+                    if(balance < count){
+                        _t.createBtn.set({'disabled':true});
+                        _t.startBtn.set({'disabled':true});
+                    }
+                })
+            });
             this._requestLoader(p);
-            _t.createBtn.set({'disabled':_t.benacoScanId});
-            _t.startBtn.set({'disabled':!_t.benacoScanId});
+
         },
         upload:function(){
             var files = this.files.sort('name',true).fetchSync();

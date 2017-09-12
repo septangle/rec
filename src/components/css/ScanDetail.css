@@ -111,6 +111,13 @@
 .ScanDetail .btn:hover {
   box-shadow: 0px 2px 15px rgba(0,0,0,0.25);
 }
+.ScanDetail .costMsg,
+.ScanDetail .errorMsg {
+  padding: 0px 30px 20px;
+  text-align: right;
+  color: #f00;
+  display: none;
+}
 .ScanDetail .add-btn {
   cursor: pointer;
   text-align: center;
