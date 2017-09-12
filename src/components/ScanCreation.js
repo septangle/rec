@@ -87,10 +87,10 @@ define([
             var files = this.files.sort('name',true).fetchSync();
             var formData = new FormData();
             var type =  this.scanType.get('value');
-            formData.append("panoramaEngineDto.title", this.scanTitle.get('value'));
+            formData.append("title", this.scanTitle.get('value'));
             type === '2D' && formData.append("unitNum", this.unitNumber.get('value'));
             array.forEach(files,function (f) {
-                formData.append("panoramaEngineDto.files", f);
+                formData.append("files", f);
             })
             var _t=this;
             var p = Stores.scans.addScan(formData,type).then(function (engineDto) {

@@ -69,8 +69,13 @@ define([
 
 
             var p = Stores.scans.getScans().then(function (scans) {
+                var statusMap={
+                    'all' : ['3','4','5'],
+                    'completed' : ['5'],
+                    'processing' : ['3','4']
+                }
                 scans = scans.filter(function (scan) {
-                    return _t.status == 'all' || scan.status == _t.status;
+                    return statusMap[_t.status].indexOf(scan.status) >=0;
                 })
                 //listeners
                 _t.container.getChildren().forEach(function(c){
@@ -79,7 +84,6 @@ define([
                 scans.forEach(function(scan){
                     _t.container.addChild(new ScanBox({
                         scanId:scan.id,
-
                         thumbnail:scan.thumbImagePath,
                         title:scan.description,
                         status:scan.status,

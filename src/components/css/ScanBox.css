@@ -47,7 +47,8 @@
 .ScanBox .actions-layer .actions .action:hover {
   color: #808080;
 }
-.ScanBox .icon-error {
+.ScanBox .icon-error,
+.ScanBox .processing {
   display: none;
   padding: 5px;
   position: absolute;
@@ -55,6 +56,10 @@
   color: #ff0707;
   font-size: 25px;
   right: 0;
+}
+.ScanBox .processing {
+  top: 10px;
+  color: #fff;
 }
 .ScanBox .thumbnail {
   width: 100%;
