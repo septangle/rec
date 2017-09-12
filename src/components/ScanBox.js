@@ -48,7 +48,7 @@ define([
         },
 
         remove:function(){
-            Stores.scans.remove(this.scanId);
+            Stores.scans.removeScan(this.scanId);
         },
         
         paint:function () {

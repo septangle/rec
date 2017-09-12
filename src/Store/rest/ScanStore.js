@@ -21,11 +21,11 @@ define(['dojo/request',
         },
 
         removeScan:function (id) {
-            return request.post(dojoConfig.basePath+"/photoscan/deletePhotoScan.do",
+            return request.post(dojoConfig.basePath+"/Panorama/deletePanorama.do",
                 {
                     headers:this.headers,
                     handleAs:'json',
-                    data:JSON.stringify({photoScanDto:{
+                    data:JSON.stringify({panoramaDto:{
                         id:id
                     }})
                 }
@@ -55,7 +55,7 @@ define(['dojo/request',
         },
 
         getScans:function (status) {
-            return request.get(dojoConfig.basePath+"/photoscan/getCurrMemberScan.do",
+            return request.get(dojoConfig.basePath+"/order/getCurrMemberScan.do",
                 {
                     headers:this.headers,
                     handleAs:'json',
@@ -64,7 +64,7 @@ define(['dojo/request',
                 if(data.error){
                     throw data.error
                 }
-                return data.photoScanDtoList;
+                return data.processDtoList;
             })
         },
         startProcess:function(benacoScanId){

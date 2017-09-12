@@ -106,7 +106,7 @@ function databaseInitialize() {
         res.sendStatus(200);
     });
 
-    app.get('/photo-web/photoscan/getCurrMemberScan.do',function (req,res) {
+    app.get('/photo-web/order/getCurrMemberScan.do',function (req,res) {
         var user = req.session.user;
         var list = scans.find({userId:user.id});
         Q.all(list.map(function (scan) {
@@ -139,7 +139,7 @@ function databaseInitialize() {
                 })
             }
             res.json({
-                photoScanDtoList:list
+                processDtoList:list
             });
             res.end();
         },function(err){

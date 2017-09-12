@@ -79,10 +79,10 @@ define([
                 scans.forEach(function(scan){
                     _t.container.addChild(new ScanBox({
                         scanId:scan.id,
-                        thumbnail:scan.thumbnail || (scan.photos[0] && scan.photos[0].image),
-                        title:scan.title,
+
+                        thumbnail:scan.thumbImagePath,
+                        title:scan.description,
                         status:scan.status,
-                        processStatus:scan.processStatus
                     }));
                 })
             });

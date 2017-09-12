@@ -9,31 +9,45 @@ define([
         headers: { 'Content-Type': 'application/json' },
 
         auth:function(user){
-            return request.post(dojoConfig.basePath+"/member/login.do",{headers:this.headers,data:JSON.stringify({photoMemberDto:user})}).then(function (data) {
+            return request.post(dojoConfig.basePath+"/member/login.do",{
+                headers:this.headers,
+                handleAs:'json',
+                data:JSON.stringify({memberDto:user})
+            }).then(function (data) {
                 if(data.error){
                     throw data.error
                 }
-                return data.photoMemberDto;
+                return data.memberDto;
             })
         },
         register:function(user){
-            return request.post(dojoConfig.basePath+"/member/register.do",{headers:this.headers,data:JSON.stringify({photoMemberDto:user})}).then(function (data) {
+            return request.post(dojoConfig.basePath+"/member/register.do",{
+                headers:this.headers,
+                handleAs:'json',
+                data:JSON.stringify({memberDto:user})
+            }).then(function (data) {
                 if(data.error){
                     throw data.error
                 }
-                return data.photoMemberDto;
+                return data.memberDto;
             })
         },
         current:function(){
-            return request.get(dojoConfig.basePath+"/member/getCurrMember",{headers:this.headers}).then(function (data) {
+            return request.get(dojoConfig.basePath+"/member/getCurrMember",{
+                headers:this.headers,
+                handleAs:'json',
+            }).then(function (data) {
                 if(data.error){
                     throw data.error
                 }
-                return data.photoMemberDto;
+                return data.memberDto;
             })
         },
         logout:function(){
-            return request.post(dojoConfig.basePath+"/member/logout",{headers:this.headers});
+            return request.post(dojoConfig.basePath+"/member/logout",{
+                headers:this.headers,
+                handleAs:'json',
+            });
         }
     })
 })
