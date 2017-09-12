@@ -114,6 +114,8 @@ define([
             var p = Stores.scans.addScan(formData,type).then(function (engineDto) {
                 _t.benacoScanId = engineDto.benacoScanId;
                 _t.refresh();
+            }).otherwise(function (err) {
+                alert('创建失败');
             });
             return this._requestLoader(p);
         },
