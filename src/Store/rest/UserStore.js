@@ -44,7 +44,7 @@ define([
             })
         },
         logout:function(){
-            return request.post(dojoConfig.basePath+"/member/logout",{
+            return request.post(dojoConfig.basePath+"/member/logout.do",{
                 headers:this.headers,
                 handleAs:'json',
             });
