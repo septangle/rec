@@ -17,46 +17,22 @@
         'angrui/Store/Stores',
         'angrui/App',
         'angrui/views/ListView',
+        'angrui/views/AdminView',
         'dojo/domReady!'
-    ], function (Stores,App,ListView) {
-        [
-            {thumbnail:"data/images/amoy-by-far-east-hospitality.jpg",title:"demo",desc:"demo scan",status:'finished'},
-            {thumbnail:"data/images/amoylobby.jpg",title:"demo",desc:"demo scan",status:'prepare'},
-            {thumbnail:"data/images/capella-singapore.jpg",title:"demo",desc:"demo scan",status:'processing', processStatus:'60%',photos:[
-                {image:"data/images/honeymoon-surprise.jpg",status:"success"}
-            ]},
-            {thumbnail:"data/images/cascading-pools-overlooking.jpg",title:"demo",desc:"demo scan",status:'processing', processStatus:'failed',photos:[
-                {image:"data/images/cascading-pools-overlooking.jpg",status:"success"},
-                {image:"data/images/club-room-marina-downtown.jpg",status:"failed"},
-            ]},
-            {thumbnail:"data/images/club-room-marina-downtown.jpg",title:"demo",desc:"demo scan",status:'finished'},
-            {thumbnail:"data/images/deluxe-double-new.jpg",title:"demo",desc:"demo scan",status:'finished'},
-            {thumbnail:"data/images/four-seasons-hotel-singapore.jpg",title:"demo",desc:"demo scan",status:'finished'},
-            {thumbnail:"data/images/foyer-by-day.jpg",title:"demo",desc:"demo scan",status:'finished'},
-            {thumbnail:"data/images/honeymoon-surprise.jpg",title:"demo",desc:"demo scan",status:'finished'},
-            {thumbnail:"data/images/hotel-exterior.jpg",title:"demo",desc:"demo scan",status:'finished'},
-            {thumbnail:"data/images/hotel-facade.jpg",title:"demo",desc:"demo scan",status:'finished'},
-            {thumbnail:"data/images/hotel-facade-night.jpg",title:"demo",desc:"demo scan",status:'finished'},
-            {thumbnail:"data/images/lobby.jpg",title:"demo",desc:"demo scan",status:'finished'},
-            {thumbnail:"data/images/lobby-bar.jpg",title:"demo",desc:"demo scan",status:'finished'},
-            {thumbnail:"data/images/rediscover-the-iconic.jpg",title:"demo",desc:"demo scan",status:'finished'},
-            {thumbnail:"data/images/rooftop-pool.jpg",title:"demo",desc:"demo scan",status:'finished'},
-            {thumbnail:"data/images/rooftop-swimming-pool.jpg",title:"demo",desc:"demo scan",status:'finished'},
-            {thumbnail:"data/images/rooms-in-the-heritage.jpg",title:"demo",desc:"demo scan",status:'finished'},
-            {thumbnail:"data/images/shangri-la-hotel.jpg",title:"demo",desc:"demo scan",status:'finished'},
-            {thumbnail:"data/images/suite-upgrade.jpg",title:"demo",desc:"demo scan",status:'finished'},
-            {thumbnail:"data/images/the-deluxe-room-with.jpg",title:"demo",desc:"demo scan",status:'finished'},
-            {thumbnail:"data/images/the-fullerton-bay-hotel.jpg",title:"demo",desc:"demo scan",status:'finished'},
-            {thumbnail:"data/images/the-homely-dining-area.jpg",title:"demo",desc:"demo scan",status:'finished'},
-            {thumbnail:"data/images/the-ritz-carlton-millenia.jpg",title:"demo",desc:"demo scan",status:'finished'},
-        ].forEach(function (item) {
-            Stores.scans.addSync(item);
+    ], function (Stores,App,ListView,AdminView) {
+        Stores.users.current().then(function (user) {
+            var app = new App({},'app');
+            if(user.name === 'admin' ) {
+                app.addView(new AdminView({title:'admin'}));
+            }else{
+                app.addView(new ListView({title:'list'}));
+            }
+            app.startup();
+
+        },function () {
+            window.location ='./login.html'
         })
 
-
-         var app = new App({},'app');
-         app.addView(new ListView());
-         app.startup();
     });
 </script>
 </body>

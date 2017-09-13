@@ -1,0 +1,55 @@
+.AdminView .side-bar {
+  width: 200px;
+  background: #00bcd4;
+  color: #fff;
+}
+.AdminView .side-bar .tab-list .tab {
+  cursor: pointer;
+  padding: 20px 20px;
+}
+.AdminView .side-bar .tab-list .tab .tab-icon {
+  display: none;
+}
+.AdminView .side-bar .tab-list .tab .tab-label {
+  padding: 0 10px;
+}
+.AdminView .side-bar .tab-list .tab:hover {
+  background: #fff;
+  color: #00bcd4;
+  box-shadow: 0px 2px 15px rgba(0,0,0,0.25);
+}
+.AdminView .side-bar .tab-list .tab.selected {
+  border-left: 2px solid #fff;
+}
+.AdminView .input-label {
+  display: inline-block;
+  width: 200px;
+  text-align: left;
+  padding: 20px;
+  font-size: 16px;
+  color: #333;
+  letter-spacing: 0;
+}
+.AdminView .input-container {
+  height: 40px;
+  width: 240px;
+  border: 1px solid #999;
+  padding: 10px 15px;
+  display: inline-block;
+}
+.AdminView .input-container.dijitValidationTextBoxError {
+  border: 1px solid #f00;
+}
+.AdminView .input-container .dijitValidationInner {
+  display: none;
+}
+.AdminView .input-container input.dijitInputInner {
+  text-align: left;
+  border: none;
+  line-height: 18px;
+  width: 200px;
+  font-size: 16px;
+}
+.AdminView .input-container input.dijitInputInner:focus {
+  outline: none;
+}

@@ -8,6 +8,10 @@ define([
             {
                 tel :'demo',
                 password: '123',
+            },
+            {
+                tel :'admin',
+                password: '123',
             }
         ],
         auth:function(args){
