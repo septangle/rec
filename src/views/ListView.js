@@ -101,6 +101,9 @@ define([
             var size = window.getBox();
             var dialog = new Dialog({
                 content:new ScanCreation({
+                    finished:function(){
+                        dialog.hide();
+                    },
                     createScan:function(){
                         var p = Stores.scans.add({
                             title:this.scanTitle.get('value'),

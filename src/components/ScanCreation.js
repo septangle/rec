@@ -72,8 +72,8 @@ define([
             _t.createBtn.onClick = _t.createBtn.__onClick = function () {
                 _t.upload();
             };
-            on(_t.startBtn.domNode,'click',function () {
-                _t.startProcess();
+            on(_t.cancelBtn.domNode,'click',function () {
+                _t.cancel();
             });
             this.refresh();
         },
@@ -81,7 +81,6 @@ define([
             var _t=this;
             var p = _t.imgList.refresh().then(function () {
                 _t.createBtn.set({'disabled':_t.benacoScanId});
-                _t.startBtn.set({'disabled':!_t.benacoScanId});
 
                 var nums =  _t.files && _t.files.fetchSync().length;
                 return Stores.users.getPrice().then(function (data) {
@@ -94,7 +93,6 @@ define([
                     domStyle.set(_t.errorMsg,'display',balance < count ? 'block' :'none');
                     if(balance < count){
                         _t.createBtn.set({'disabled':true});
-                        _t.startBtn.set({'disabled':true});
                     }
                 })
             });
@@ -129,13 +127,8 @@ define([
         selectFiles:function(){
 
         },
-        startProcess:function(){
-            //TODO disable when have no scanId
-            var _t=this;
-            var p = Stores.scans.startProcess(this.benacoScanId).then(function () {
-                _t.finished();
-            });
-            this._requestLoader(p)
+        cancel:function(){
+            this.finished();
         },
         finished:function () {
 
