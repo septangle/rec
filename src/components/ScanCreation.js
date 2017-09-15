@@ -63,6 +63,7 @@ define([
             _t.createBtn.startup();
             on(_t.uploadFile, "change", function() {
                 _t.addFiles(_t.uploadFile.files);
+                _t.uploadFile.value = null ;
             });
             on(this.uploadButton, "click", function(event) {
                 _t.uploadFile.click();
