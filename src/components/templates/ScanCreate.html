@@ -6,14 +6,14 @@
     </div>
     <div class="input-group">
         <div class="input-label" >图片类型</div>
-        <select class="input-container" data-dojo-attach-point="scanType" data-dojo-props="value:'3D'" data-dojo-type="angrui/components/Select" value="">
-            <option value="1">2D</option>
-            <option value="2">3D</option>
+        <select class="input-container" data-dojo-attach-point="scanType" data-dojo-props="value:'1'" data-dojo-type="angrui/components/Select" value="">
+            <option value="0">平面照片</option>
+            <option value="1">全景照片</option>
         </select>
     </div>
-    <div class="input-group hidden" data-dojo-attach-point="pointNum">
+    <div class="input-group" data-dojo-attach-point="pointNum">
         <div class="input-label" >单点张数</div>
-        <div class="input-container"  data-dojo-type="dijit/form/NumberTextBox" data-dojo-attach-point="unitNumber" data-dojo-props="value:1"></div>
+        <div class="input-container"  data-dojo-type="dijit/form/NumberTextBox" data-dojo-attach-point="unitNumber" readonly data-dojo-props="value:1"></div>
     </div>
     <div class="image-list" data-dojo-attach-point="imgList">
         <div class="photo" data-dojo-attach-point="uploadButton">

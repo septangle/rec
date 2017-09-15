@@ -69,7 +69,10 @@ define([
                 _t.uploadFile.click();
             });
             on(_t.scanType,'change',function (val) {
-                domClass.toggle(_t.pointNum,'hidden',val == '3D');
+                _t.unitNumber.set('readOnly',val == 1)
+                if(val == 1){
+                    _t.unitNumber.set('value',1)
+                }
             });
             _t.createBtn.onClick = _t.createBtn.__onClick = function () {
                 _t.upload();
