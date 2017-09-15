@@ -110,22 +110,24 @@ define([
 
         },
         upload:function(){
-            var files = this.files.sort('name',true).fetchSync();
-            var formData = new FormData();
-            var type =  this.scanType.get('value');
-            formData.append("title", this.scanTitle.get('value'));
-            formData.append("number", this.unitNumber.get('value'));
-            array.forEach(files,function (f) {
-                formData.append("files", f);
-            })
-            var _t=this;
-            var p = Stores.scans.addScan(formData,type).then(function (engineDto) {
-                _t.finished();
-            }).otherwise(function (err) {
-                console.error(err);
-                alert('创建失败');
-            });
-            return this._requestLoader(p);
+            if(this.creationForm.validate()){
+                var files = this.files.sort('name',true).fetchSync();
+                var formData = new FormData();
+                var type =  this.scanType.get('value');
+                formData.append("title", this.scanTitle.get('value'));
+                formData.append("number", this.unitNumber.get('value'));
+                array.forEach(files,function (f) {
+                    formData.append("files", f);
+                })
+                var _t=this;
+                var p = Stores.scans.addScan(formData,type).then(function (engineDto) {
+                    _t.finished();
+                }).otherwise(function (err) {
+                    console.error(err);
+                    alert('创建失败');
+                });
+                return this._requestLoader(p);
+            }
         },
         addFiles:function(files){
             var _t=this;
