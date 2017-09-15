@@ -29,11 +29,14 @@ define(['dojo/when',
 
         },
         recharge:function (data) {
+            if(data.transType === '2'){
+                data.amount *= -1;
+            }
             return request.post(dojoConfig.basePath+"/balancetrace/recharge.do",
                 {
                     headers: { 'Content-Type': 'application/json' },
                     handleAs:'json',
-                    data:JSON.stringify({balanceDto:data})
+                    data:JSON.stringify({balanceTraceDto:data})
                 }
             ).then(function (data) {
                 if(data.error){

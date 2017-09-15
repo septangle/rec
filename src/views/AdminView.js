@@ -65,7 +65,7 @@ define([
             })
             on(this.rechargemMmeberId, 'change', function (val) {
                 if (val) {
-                    var p = Stores.balance.balance().then(function (balance) {
+                    var p = Stores.balance.balance(_t.rechargemMmeberId.get('value')).then(function (balance) {
                         _t.balance.set('value',balance.amount);
                     });
                     _t._requestLoader(p);
@@ -115,8 +115,14 @@ define([
         },
 
         executeCharge: function () {
+            var _t = this;
             if (this.rechargeForm.validate()) {
-                var p = Stores.balance.recharge(this.rechargeForm.getValues()).otherwise(function () {
+                var p = Stores.balance.recharge(this.rechargeForm.getValues()).then(function () {
+                    return Stores.balance.balance(_t.rechargemMmeberId.get('value')).then(function (balance) {
+                        _t.balance.set('value',balance.amount);
+                    });
+                }).otherwise(function (err) {
+                    console.error(err);
                     alert('充值失败');
                 })
                 this._requestLoader(p);

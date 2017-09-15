@@ -14,10 +14,8 @@
                     <div class="input-group">
                         <div class="input-label" for="">会员</div>
                         <select class="input-container" data-dojo-attach-point="rechargemMmeberId" name="memberId"  required="required"
-                                data-dojo-props="placeHolder:'操作类型',searchAttr:'memberName'"
+                                data-dojo-props="placeHolder:'会员ID',searchAttr:'memberName'"
                                 data-dojo-type="angrui/components/Select" value="">
-                            <option value="1">12312312312</option>
-                            <option value="2">12312312311</option>
                         </select>
                     </div>
                     <div class="input-group">
@@ -44,7 +42,7 @@
                     </div>
                     <div style="padding: 10px 20px;">
                         <div class="btn btn-primary" data-dojo-attach-event="click:executeCharge">确定</div>
-                        <div class="btn btn-primary" data-dojo-attach-event="click:cancelCharge">取消</div>
+                        <div class="btn btn-primary" style="background: grey" data-dojo-attach-event="click:cancelCharge">清空</div>
                     </div>
                 </div>
             </div>
