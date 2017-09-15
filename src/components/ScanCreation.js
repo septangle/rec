@@ -1,4 +1,5 @@
 define([
+    'dojo/promise/all',
     'dojo/dom-style',
     'dijit/form/NumberTextBox',
     'dojo/_base/array',
@@ -22,7 +23,7 @@ define([
     'dijit/form/ValidationTextBox',
     'xstyle/css!./css/ScanDetail.css',
     "angrui/components/Select"
-],function (domStyle, NumberTextBox, array, imageindicatorTemplate, when, LoaderMixin, FileUploader, Dialog, on, domClass, Memory, StoreContainer, List, Container, Stores, WidgetsInTemplateMixin, scancreateTemplate, TemplatedMixin, WidgetBase, declare) {
+],function (all, domStyle, NumberTextBox, array, imageindicatorTemplate, when, LoaderMixin, FileUploader, Dialog, on, domClass, Memory, StoreContainer, List, Container, Stores, WidgetsInTemplateMixin, scancreateTemplate, TemplatedMixin, WidgetBase, declare) {
 
     var Image= declare([WidgetBase,TemplatedMixin],{
         templateString:imageindicatorTemplate,
@@ -83,9 +84,12 @@ define([
                 _t.createBtn.set({'disabled':_t.benacoScanId});
 
                 var nums =  _t.files && _t.files.fetchSync().length;
-                return Stores.users.getPrice().then(function (data) {
-                    var balance = 10000;
-                    var count = data.price * nums;
+                return all({
+                    price:Stores.users.getPrice(),
+                    balance:Stores.balance.balance()
+                }).then(function (data) {
+                    var balance = data.balance;
+                    var count = data.price.price * nums;
                     _t.costAmount.innerHTML = count;
                     _t.picAmount.innerHTML = nums;
                     _t.leftMoney.innerHTML= balance;
