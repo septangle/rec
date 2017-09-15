@@ -29,12 +29,7 @@ define([
         }),
 
         getCities: function(val){
-            //TODO
-            var code = cityJson.filter(function (item) {
-                return item.item_name==val;
-            })[0].item_code;
-
-
+            var code = val;
             return new Memory({
                 data: cityJson.filter(function (item) {
                     return parseInt(item.item_code) - code > 0 && parseInt(item.item_code) - code < 10000
