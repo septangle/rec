@@ -100,6 +100,7 @@ define([
         newScan:function(){
             var size = window.getBox();
             var dialog = new Dialog({
+                closeOnBlur:false,
                 content:new ScanCreation({
                     finished:function(){
                         dialog.hide();

@@ -1,4 +1,5 @@
 define([
+    'dojo/dom-geometry',
     'dijit/_WidgetBase',
     'dojo/dom-style',
     'dijit/form/NumberTextBox',
@@ -18,8 +19,8 @@ define([
     "dijit/form/Select",
     'angrui/components/Select',
     "dijit/form/Form"
-],function (WidgetBase, domStyle, NumberTextBox, lang, ValidationTextBox, on, Stores, domClass, WidgetsInTemplateMixin, registerviewTemplate, TemplatedMixin, LayoutWidget, declare) {
-    return declare([WidgetBase,TemplatedMixin,WidgetsInTemplateMixin],{
+],function (domGeometry, WidgetBase, domStyle, NumberTextBox, lang, ValidationTextBox, on, Stores, domClass, WidgetsInTemplateMixin, registerviewTemplate, TemplatedMixin, LayoutWidget, declare) {
+    return declare([LayoutWidget,TemplatedMixin,WidgetsInTemplateMixin],{
         templateString:registerviewTemplate,
         basicStatusPng:  require.toUrl('angrui/css/images/status-basic.png'),
         additionalStatusPng:  require.toUrl('angrui/css/images/status-addtional.png'),
