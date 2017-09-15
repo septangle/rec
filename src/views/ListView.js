@@ -70,9 +70,9 @@ define([
 
             var p = Stores.scans.getScans().then(function (scans) {
                 var statusMap={
-                    'all' : ['3','4','5'],
-                    'completed' : ['5'],
-                    'processing' : ['3','4']
+                    'all' : ['0','1','2','3'],
+                    'completed' : ['2','3'],
+                    'processing' : ['0','1']
                 }
                 scans = scans.filter(function (scan) {
                     return statusMap[_t.status].indexOf(scan.status) >=0;

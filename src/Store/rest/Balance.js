@@ -23,7 +23,7 @@ define(['dojo/when',
                         if(data.error){
                             throw data.error
                         }
-                        return data.balanceTraceDto;
+                        return data.balanceDto;
                     })
             })
 
@@ -33,7 +33,7 @@ define(['dojo/when',
                 {
                     headers: { 'Content-Type': 'application/json' },
                     handleAs:'json',
-                    data:JSON.stringify({balanceTraceDto:data})
+                    data:JSON.stringify({balanceDto:data})
                 }
             ).then(function (data) {
                 if(data.error){

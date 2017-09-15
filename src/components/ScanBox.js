@@ -58,13 +58,13 @@ define([
         startup:function(){
             this.inherited(arguments);
             var _t=this;
-            this.preViewAble = _t.status === '5';
-            if(_t.status === '4'){
+            this.preViewAble = _t.status === '2';
+            if(_t.status === '3'){
                 domStyle.set(this.errorIcon,{
                     display:'block'
                 })
             }
-            if(_t.status === '3'){
+            if(_t.status === '0' || _t.status === '1'){
                 domStyle.set(this.processingIcon,{
                     display:'block'
                 })

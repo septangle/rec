@@ -82,21 +82,23 @@ define([
         refresh:function () {
             var _t=this;
             var p = _t.imgList.refresh().then(function () {
-                _t.createBtn.set({'disabled':_t.benacoScanId});
 
                 var nums =  _t.files && _t.files.fetchSync().length;
                 return all({
                     price:Stores.users.getPrice(),
                     balance:Stores.balance.balance()
                 }).then(function (data) {
-                    var balance = data.balance;
-                    var count = data.price.price * nums;
+                    var balance = data.balance.amount;
+                    var unitNumber = _t.unitNumber.get('value');
+                    var count = data.price.price * nums / unitNumber;
                     _t.costAmount.innerHTML = count;
                     _t.picAmount.innerHTML = nums;
                     _t.leftMoney.innerHTML= balance;
                     domStyle.set(_t.costMsg,'display','block');
-                    domStyle.set(_t.errorMsg,'display',balance < count ? 'block' :'none');
+                    domStyle.set(_t.errorMsg,'display', 'none');
+                    _t.createBtn.set({'disabled':false});
                     if(balance < count){
+                        domStyle.set(_t.errorMsg,'display', 'block');
                         _t.createBtn.set({'disabled':true});
                     }
                 })
@@ -115,9 +117,9 @@ define([
             })
             var _t=this;
             var p = Stores.scans.addScan(formData,type).then(function (engineDto) {
-                _t.benacoScanId = engineDto.benacoScanId;
-                _t.refresh();
+                _t.finished();
             }).otherwise(function (err) {
+                console.error(err);
                 alert('创建失败');
             });
             return this._requestLoader(p);

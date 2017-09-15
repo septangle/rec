@@ -21,11 +21,11 @@ define(['dojo/request',
         },
 
         removeScan:function (id) {
-            return request.post(dojoConfig.basePath+"/Panorama/deletePanorama.do",
+            return request.post(dojoConfig.basePath+"/order/deleteOrderById.do",
                 {
                     headers:this.headers,
                     handleAs:'json',
-                    data:JSON.stringify({panoramaDto:{
+                    data:JSON.stringify({orderDto:{
                         id:id
                     }})
                 }
@@ -33,7 +33,7 @@ define(['dojo/request',
                 if(data.error){
                     throw data.error
                 }
-                return data.photoScanDto;
+                return data.orderDto;
             })
         },
 

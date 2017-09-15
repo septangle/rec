@@ -2,13 +2,13 @@
     <div data-dojo-attach-point="loaderNode" class="loaderOverlay"><i class="loader fa fa-spinner fa-spin  fa-3x"></i></div>
     <div class="input-group">
         <div class="input-label" >场景名称</div>
-        <div class="input-container"  data-dojo-type="dijit/form/ValidationTextBox" data-dojo-attach-point="scanTitle"></div>
+        <div class="input-container"  data-dojo-type="dijit/form/ValidationTextBox" required=true data-dojo-attach-point="scanTitle"></div>
     </div>
     <div class="input-group">
         <div class="input-label" >图片类型</div>
         <select class="input-container" data-dojo-attach-point="scanType" data-dojo-props="value:'3D'" data-dojo-type="angrui/components/Select" value="">
-            <option >2D</option>
-            <option >3D</option>
+            <option value="1">2D</option>
+            <option value="2">3D</option>
         </select>
     </div>
     <div class="input-group hidden" data-dojo-attach-point="pointNum">
