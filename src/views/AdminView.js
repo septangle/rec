@@ -1,4 +1,6 @@
 define([
+    'dojo/store/Memory',
+    '../Store/Stores',
     'dijit/layout/StackContainer',
     'dijit/registry',
     'dojo/query',
@@ -31,13 +33,33 @@ define([
     "dijit/form/Form",
     "dijit/layout/BorderContainer",
     "dijit/layout/ContentPane",
-    "angrui/components/Select"
-],function (StackContainer, registry, query, domClass, LoaderMixin, ScanDetail, window, domStyle, on, lang, ScanCreation, Dialog, Button, Container, Stores, ScanBox, LayoutContainer, LayoutWidget, domGeometry, WidgetBase, WidgetsInTemplateMixin, adminviewTemplate, TemplatedMixin, declare) {
+    "angrui/components/Select",
+    'dijit/form/FilteringSelect'
+],function (Memory, Stores, StackContainer, registry, query, domClass, LoaderMixin, ScanDetail, window, domStyle, on, lang, ScanCreation, Dialog, Button, Container, Stores, ScanBox, LayoutContainer, LayoutWidget, domGeometry, WidgetBase, WidgetsInTemplateMixin, adminviewTemplate, TemplatedMixin, declare) {
     return declare([LayoutWidget,TemplatedMixin,WidgetsInTemplateMixin,LoaderMixin],{
         templateString:adminviewTemplate,
 
         postCreate:function(){
             this.inherited(arguments);
+        },
+
+        startup:function(){
+          this.inherited(arguments);
+          var _t=this;
+          Stores.users.getAll().then(function (users) {
+              var store = new Memory({
+                  data:users
+              })
+              _t.rechargemMmeberId.set({'store':store})
+          })
+          on(this.rechargemMmeberId,'change',function (val) {
+              if(val){
+                  var p = Stores.balance.balance().then(function (balance) {
+                      _t.balance = balance.balance;
+                  });
+                  _t._requestLoader(p);
+              }
+          })
         },
 
         layout:function(){
@@ -56,8 +78,19 @@ define([
         },
         selectRecharge:function () {
             this.selectView('reCharge')
+        },
+
+        executeCharge:function () {
+            if( this.rechargeForm.validate()){
+                var p=Stores.balance.recharge(this.rechargeForm.getValues()).otherwise(function () {
+                    alert('充值失败');
+                })
+                this._requestLoader(p);
+            }
+
+        },
+        cancelCharge:function () {
+            this.rechargeForm.reset();
         }
-
-
     })
 })

@@ -1,18 +1,19 @@
 define([
+    'dojo/_base/lang',
     './data/CityData',
     'dojo/store/Memory',
     'dojo/_base/declare',
     './'+dojoConfig.storeType+'/UserStore',
     './'+dojoConfig.storeType+'/ScanStore',
-    './'+dojoConfig.storeType+'/Balance'
+    './'+dojoConfig.storeType+'/Balance',
+    'exports'
 
-
-],function (CityData,Memory, declare, UserStore,ScanStore,Balance) {
+],function (lang, CityData, Memory, declare, UserStore, ScanStore, Balance, exports) {
 
     var cityJson = CityData;
 
 
-    return {
+    lang.mixin(exports, {
         users:new UserStore(),
 
 
@@ -49,5 +50,6 @@ define([
 
         
 
-    }
+    })
+    return exports;
 })

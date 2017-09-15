@@ -10,24 +10,26 @@
         <div data-dojo-type='dijit/layout/StackContainer' data-dojo-attach-point="stackContainer" data-dojo-props="region:'center'" >
             <div data-dojo-type="dijit/layout/ContentPane" data-dojo-attach-point="rechargePane" data-dojo-props="title:'reCharge'">
                 <h1 style="padding: 20px;">充值/退款</h1>
-                <div>
+                <div  data-dojo-type="dijit/form/Form" data-dojo-attach-point="rechargeForm" class="dataForm">
                     <div class="input-group">
                         <div class="input-label" for="">会员</div>
-                        <select class="input-container" data-dojo-attach-point="memeberId" name="memeberId"  required="required"  data-dojo-props="placeHolder:'操作类型'" data-dojo-type="angrui/components/Select" value="">
+                        <select class="input-container" data-dojo-attach-point="rechargemMmeberId" name="memberId"  required="required"
+                                data-dojo-props="placeHolder:'操作类型',searchAttr:'memberName'"
+                                data-dojo-type="angrui/components/Select" value="">
                             <option value="1">12312312312</option>
                             <option value="2">12312312311</option>
                         </select>
                     </div>
                     <div class="input-group">
                         <div class="input-label" for="">操作类型</div>
-                        <select class="input-container" data-dojo-attach-point="chargeType" name="chargeType"  required="required"  data-dojo-props="placeHolder:'操作类型'" data-dojo-type="angrui/components/Select" value="">
+                        <select class="input-container" data-dojo-attach-point="chargeType" name="transType"  required="required"  data-dojo-props="placeHolder:'操作类型'" data-dojo-type="angrui/components/Select" value="">
                             <option value="1">充值</option>
                             <option value="2">退款</option>
                         </select>
                     </div>
                     <div class="input-group">
                         <div class="input-label" for="">当前余额</div>
-                        <input class="input-container" type="text"  name="amount"  readonly
+                        <input class="input-container" type="text" readonly
                                data-dojo-type='dijit/form/ValidationTextBox' data-dojo-attach-point="balance" >
                     </div>
                     <div class="input-group">
@@ -38,7 +40,11 @@
                     </div>
                     <div class="input-group">
                         <div class="input-label" for="">备注</div>
-                        <input class="input-container" type="text"  name="comment"  data-dojo-type='dijit/form/ValidationTextBox' data-dojo-attach-point="address" placeholder="备注">
+                        <input class="input-container" type="text"  name="remark"  data-dojo-type='dijit/form/ValidationTextBox' data-dojo-attach-point="address" placeholder="备注">
+                    </div>
+                    <div style="padding: 10px;">
+                        <div class="btn btn-primary" data-dojo-attach-event="click:executeCharge">确定</div>
+                        <div class="btn btn-primary" data-dojo-attach-event="click:cancelCharge">取消</div>
                     </div>
                 </div>
             </div>

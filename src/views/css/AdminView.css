@@ -53,3 +53,23 @@
 .AdminView .input-container input.dijitInputInner:focus {
   outline: none;
 }
+.AdminView .btn {
+  position: relative;
+  left: 135px;
+  width: 100px;
+  height: 40px;
+  background: #009eff;
+  border: none;
+  font-size: 16px;
+  color: #fff;
+  letter-spacing: 0;
+  display: inline-block;
+  line-height: 40px;
+  text-align: center;
+}
+.AdminView .btn:focus {
+  outline: none;
+}
+.AdminView .btn:hover {
+  box-shadow: 0px 2px 15px rgba(0,0,0,0.25);
+}

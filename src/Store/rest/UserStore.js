@@ -1,9 +1,7 @@
 define([
-    'dojo/when',
     'dojo/request',
-    'dstore/Memory',
     'dojo/_base/declare',
-],function (when, request, Memory, declare) {
+],function (request, declare) {
     return declare([],{
 
         headers: { 'Content-Type': 'application/json' },
@@ -58,6 +56,17 @@ define([
                     throw data.error
                 }
                 return data.priceDto;
+            })
+        },
+        getAll:function(){
+            return request.get(dojoConfig.basePath+"/member/getAllMember.do",{
+                headers:this.headers,
+                handleAs:'json',
+            }).then(function (data) {
+                if(data.error){
+                    throw data.error
+                }
+                return data.memberDtoList;
             })
         }
     })
