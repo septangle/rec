@@ -42,7 +42,7 @@
                         <div class="input-label" for="">备注</div>
                         <input class="input-container" type="text"  name="remark"  data-dojo-type='dijit/form/ValidationTextBox' data-dojo-attach-point="address" placeholder="备注">
                     </div>
-                    <div style="padding: 10px;">
+                    <div style="padding: 10px 20px;">
                         <div class="btn btn-primary" data-dojo-attach-event="click:executeCharge">确定</div>
                         <div class="btn btn-primary" data-dojo-attach-event="click:cancelCharge">取消</div>
                     </div>
@@ -51,7 +51,24 @@
             <div data-dojo-type="dijit/layout/ContentPane" data-dojo-attach-point="rechargePane" data-dojo-props="title:'2dManagement'">
                 <h1 style="padding: 20px;">2D 合成</h1>
                 <div>
-
+                    <div data-dojo-attach-point="loaderNode" class="loaderOverlay"><i class="loader fa fa-spinner fa-spin  fa-3x"></i></div>
+                    <div class="input-group" style="margin-left: 10px;">
+                        <div class="input-label" >OrderID</div>
+                        <div class="input-container"  data-dojo-type="dijit/form/ValidationTextBox" data-dojo-attach-point="orderId"></div>
+                    </div>
+                    <div class="image-list" data-dojo-attach-point="imgList">
+                        <div class="photo" data-dojo-attach-point="uploadButton">
+                            <div class="image">
+                                <div class="add-btn">
+                                    <i class="fa fa-5x fa-plus-square-o" style="position: relative;top: 25px;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-bar" style="padding: 0px 27px;">
+                        <input type="file" style="display: none;" multiple="" data-dojo-attach-point="uploadFile" />
+                        <button class="btn" data-dojo-type="dijit/form/Button" data-dojo-attach-point="createBtn">上传</button>
+                    </div>
                 </div>
             </div>
         </div>
