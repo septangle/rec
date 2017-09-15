@@ -19,6 +19,7 @@ define([
 ],function (Stores,WidgetsInTemplateMixin, BorderContainer, StackContainer, ContentPane, window, Container, domStyle, domGeometry, LayoutWidget, appTemplate, TemplatedMixin, WidgetBase, declare) {
     return declare([LayoutWidget,TemplatedMixin,WidgetsInTemplateMixin],{
         templateString:appTemplate,
+        welComeMsg:'',
         addView:function (view) {
             this.stackNode.addChild(view);
         },

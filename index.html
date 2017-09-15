@@ -30,7 +30,9 @@
         'dojo/domReady!'
     ], function (Stores,App,ListView,AdminView) {
         Stores.users.current().then(function (user) {
-            var app = new App({},'app');
+            var app = new App({
+                welComeMsg:user.memberName+', '
+            },'app');
             app.addView(new AdminView({title:'admin'}));
             app.addView(new ListView({title:'list'}));
             app.startup();
