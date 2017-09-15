@@ -23,7 +23,7 @@ define(['dojo/when',
                         if(data.error){
                             throw data.error
                         }
-                        return data.balanceDto;
+                        return data.balanceDto || {amount :0 };
                     })
             })
 

@@ -99,7 +99,7 @@ define([
                     _t.leftMoney.innerHTML= balance;
                     domStyle.set(_t.costMsg,'display','block');
                     domStyle.set(_t.errorMsg,'display', 'none');
-                    _t.createBtn.set({'disabled':false});
+                    _t.createBtn.set({'disabled':balance<=0});
                     if(balance < count){
                         domStyle.set(_t.errorMsg,'display', 'block');
                         _t.createBtn.set({'disabled':true});
