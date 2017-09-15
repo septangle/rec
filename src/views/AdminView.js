@@ -66,7 +66,7 @@ define([
             on(this.rechargemMmeberId, 'change', function (val) {
                 if (val) {
                     var p = Stores.balance.balance(_t.rechargemMmeberId.get('value')).then(function (balance) {
-                        _t.balance.set('value',balance.amount || 0);
+                        _t.balance.set('value',(balance && balance.amount) || 0);
                     });
                     _t._requestLoader(p);
                 }
