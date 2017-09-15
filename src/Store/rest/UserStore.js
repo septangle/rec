@@ -45,6 +45,12 @@ define([
             return request.post(dojoConfig.basePath+"/member/logout.do",{
                 headers:this.headers,
                 handleAs:'json',
+                data:"{}"
+            }).then(function (data) {
+                if(data.error){
+                    throw data.error
+                }
+                return data.memberDto;
             });
         },
         getPrice:function () {
