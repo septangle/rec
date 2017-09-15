@@ -13,7 +13,7 @@
     </div>
     <div class="input-group hidden" data-dojo-attach-point="pointNum">
         <div class="input-label" >单点张数</div>
-        <div class="input-container"  data-dojo-type="dijit/form/NumberTextBox" data-dojo-attach-point="unitNumber"></div>
+        <div class="input-container"  data-dojo-type="dijit/form/NumberTextBox" data-dojo-attach-point="unitNumber" data-dojo-props="value:1"></div>
     </div>
     <div class="image-list" data-dojo-attach-point="imgList">
         <div class="photo" data-dojo-attach-point="uploadButton">
@@ -25,10 +25,10 @@
         </div>
     </div>
     <div class="costMsg" data-dojo-attach-point="costMsg">
-        共 <span data-dojo-attach-point="picAmount"></span> 张图片,预计消费 <span data-dojo-attach-point="costAmount"></span> 元
-    </div>
-    <div class="errorMsg" data-dojo-attach-point="errorMsg">
-        当前余额 <span data-dojo-attach-point="leftMoney"></span>元，不足此次消费。
+        当前余额 <span data-dojo-attach-point="leftMoney"></span>元，
+        本次共 <span data-dojo-attach-point="picAmount"></span> 张图片,
+        预计消费 <span data-dojo-attach-point="costAmount"></span> 元,
+        <span data-dojo-attach-point="errorMsg">余额不足此次消费。</span>
     </div>
     <div class="button-bar">
         <input type="file" style="display: none;" multiple="" data-dojo-attach-point="uploadFile" />

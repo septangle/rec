@@ -7,7 +7,7 @@ define(['dojo/request',
         headers: { 'Content-Type': 'application/json' },
 
         addScan:function (data) {
-            return request.post(dojoConfig.basePath+"/engine/addPanoramicPhotos.do",
+            return request.post(dojoConfig.basePath+"/engine/addPhotos.do",
                 {
                     handleAs:'json',
                     data:data //TODO

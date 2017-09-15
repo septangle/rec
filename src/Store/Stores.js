@@ -3,10 +3,11 @@ define([
     'dojo/store/Memory',
     'dojo/_base/declare',
     './'+dojoConfig.storeType+'/UserStore',
-    './'+dojoConfig.storeType+'/ScanStore'
+    './'+dojoConfig.storeType+'/ScanStore',
+    './'+dojoConfig.storeType+'/Balance'
 
 
-],function (CityData,Memory, declare, UserStore,ScanStore) {
+],function (CityData,Memory, declare, UserStore,ScanStore,Balance) {
 
     var cityJson = CityData;
 
@@ -44,6 +45,7 @@ define([
 
         scans : new ScanStore(),
 
+        balance:new Balance()
 
         
 

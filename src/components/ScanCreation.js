@@ -84,12 +84,12 @@ define([
 
                 var nums =  _t.files && _t.files.fetchSync().length;
                 return Stores.users.getPrice().then(function (data) {
-                    var balance = 100000;
+                    var balance = 10000;
                     var count = data.price * nums;
                     _t.costAmount.innerHTML = count;
                     _t.picAmount.innerHTML = nums;
                     _t.leftMoney.innerHTML= balance;
-                    domStyle.set(_t.costMsg,'display',(nums>0 && count <= balance ) ? 'block' :'none');
+                    domStyle.set(_t.costMsg,'display','block');
                     domStyle.set(_t.errorMsg,'display',balance < count ? 'block' :'none');
                     if(balance < count){
                         _t.createBtn.set({'disabled':true});
@@ -104,7 +104,7 @@ define([
             var formData = new FormData();
             var type =  this.scanType.get('value');
             formData.append("title", this.scanTitle.get('value'));
-            type === '2D' && formData.append("unitNum", this.unitNumber.get('value'));
+            formData.append("number", this.unitNumber.get('value'));
             array.forEach(files,function (f) {
                 formData.append("files", f);
             })
