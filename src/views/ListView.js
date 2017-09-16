@@ -99,11 +99,13 @@ define([
 
         newScan:function(){
             var size = window.getBox();
+            var _t=this;
             var dialog = new Dialog({
                 closeOnBlur:false,
                 content:new ScanCreation({
                     finished:function(){
                         dialog.hide();
+                        _t.refresh();
                     },
                     createScan:function(){
                         var p = Stores.scans.add({
