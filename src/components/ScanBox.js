@@ -25,7 +25,7 @@ define([
         preView:function() {
             var size = window.getBox();
             new Dialog({
-                content:string.substitute("<iframe src='https://beta.benaco.com/embed/${scanId}' width='${w}px' height='${h}px' ></iframe>",{w:size.w*0.9,h:size.h*0.9,scanId:this.scanId}),
+                content:string.substitute("<iframe src='https://beta.benaco.com/embed/${benacoScanId}' width='${w}px' height='${h}px' ></iframe>",{w:size.w*0.9,h:size.h*0.9,benacoScanId:this.benacoScanId}),
             }).show()
         },
 

@@ -84,6 +84,7 @@ define([
                 scans.forEach(function(scan){
                     _t.container.addChild(new ScanBox({
                         scanId:scan.id,
+                        benacoScanId:scan.benacoScanId,
                         thumbnail:scan.thumbImagePath,
                         title:scan.description,
                         status:scan.status,
