@@ -81,7 +81,7 @@ define([
                     display:'none'
                 });
             }
-            on(_t.imageNode,'dblclick',function(){
+            on(_t.imageNode,'click',function(){
                 if(_t.preViewAble) {
                     _t.preView();
                 }else{
