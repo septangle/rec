@@ -1,52 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+  <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>RECO全景平台</title>
-
-    <script src="./dojoConfig.js"></script>
-    <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.css"/>
-    <script type="text/javascript" src="libs/dojo/dojo.js"></script>
-    <style>
-        .navbar-nav .login,.navbar-nav .register{
-            display:none !important;
-        }
-        .navbar-nav .logout{
-            display:inline-block !important;
-        }
-    </style>
-</head>
-<body>
-<div id="app"></div>
-<script type="text/javascript">
-    require([
-        'angrui/Store/Stores',
-        'angrui/App',
-        'angrui/views/ListView',
-        'angrui/views/AdminView',
-        'dojo/domReady!'
-    ], function (Stores,App,ListView,AdminView) {
-        Stores.users.current().then(function (user) {
-            var app = new App({
-                welComeMsg:user.memberName+', '
-            },'app');
-            app.addView(new AdminView({title:'admin'}));
-            app.addView(new ListView({title:'list'}));
-            app.startup();
-            if(user.memberName === 'unreAdmin' ) {
-                app.selectView('admin')
-            }else{
-                app.selectView('list')
-            }
-
-        },function () {
-            window.location ='./login.html'
-        })
-
-    });
-</script>
-</body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>ONWING</title>
+    <!--<link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet" type="text/css">-->
+    <link href="https://cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
 </html>

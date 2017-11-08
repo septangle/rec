@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="utf-8">
+</head>
+<body>
+<div id="content"></div>
+<script>
+  var ids = [
+    {scanId: '3da9e0a7-6608-476d-b5c8-91a01a7e9320', label: '上海珍荣--红星美凯龙店（沪南路）'},
+    {scanId: 'ddaad9ef-7d0d-4e8a-98a0-45e6aa8b8a15', label: 'RizCarlton'},
+    {scanId: '1e21b2e9-de19-44ff-823d-3f2a69031137', label: '公园'},
+    {scanId: 'b778b53d-81e4-4120-a35c-75cac442e05a', label: 'Marriott'},
+    {scanId: 'b6902568-7519-4bd8-aa3d-c9bc340eb80c', label: '别墅'},
+    {scanId: '8821122e-9190-4c31-89b1-9e2efe2f484b', label: '夜景餐厅'},
+    {scanId: '1dd8a32e-7e6f-4a14-8d3e-46e68c357d00', label: '商店'},
+    {scanId: 'ddaad9ef-7d0d-4e8a-98a0-45e6aa8b8a15', label: '新加坡公寓'},
+    {scanId: 'f1c5a58a-0a4d-4610-9e8d-5c6403b2a131', label: '济南博物馆'},
+    {scanId: '1e21b2e9-de19-44ff-823d-3f2a69031137', label: '室外台灣清華大學校園'},
+    {scanId: 'b679b4b0-c040-4586-ac9f-19bc075733f8', label: '1F'},
+    {scanId: '3154499d-f212-497e-90a0-15f82b2135ec', label: 'PS'},
+    {scanId: 'b84b3414-a923-4ff1-8384-53d6eeff7a62', label: '2F'},
+    {scanId: 'e316fd41-a85d-45a8-8c38-e222e57b6660', label: 'B1'},
+    {scanId: '06567de4-5960-4202-9721-e259927d1fc1', label: 'Business Center'},
+    {scanId: 'cf8d1f10-746e-4393-a070-89bbf0e6f789', label: '3F'},
+  ].forEach(function (scan) {
+    var div = document.createElement('div')
+    div.innerHTML = '<a href=' + scan.scanId + '"view.htmld=">' + scan.label + '</a>'
+    document.getElementById('content').appendChild(div)
+  })
+</script>
+</body>
+</html>
